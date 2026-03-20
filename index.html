@@ -22,7 +22,6 @@
         .dynamic-logo { max-height: 70px; max-width: 150px; object-fit: contain; }
         .pass-container { position: relative; }
         .pass-toggle { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #666; }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body class="p-4 md:p-10">
@@ -48,23 +47,23 @@
                 </div>
             </div>
             <button id="login-btn" onclick="window.handleLogin()" class="w-full btn-gradient p-3 rounded-lg font-bold uppercase tracking-wider mb-4">Login Now</button>
-            <button onclick="window.showInquiryForm()" class="text-xs text-accent-blue hover:underline">Job Inquiry? Apply Here</button>
+            <button onclick="window.showInquiryForm()" class="text-xs text-accent-blue hover:underline">Apply for Job? (New User Inquiry)</button>
             <p id="login-error" class="text-red-500 mt-4 text-xs font-bold hidden">Invalid credentials. Access Denied!</p>
         </div>
 
-        <!-- NEW USER INQUIRY LOGIN -->
+        <!-- NEW USER INQUIRY FORM -->
         <div id="inquiry-login-card" class="glass-card p-8 shadow-2xl hidden">
-            <h2 class="text-xl font-bold mb-4 uppercase text-accent-blue">Candidate Login</h2>
+            <h2 class="text-xl font-bold mb-4 uppercase text-accent-blue">Job Inquiry</h2>
             <div class="mb-4 text-left">
                 <label class="block text-xs font-bold mb-2 text-gray-500 uppercase">Your Name</label>
                 <input type="text" id="inq-name" class="w-full p-3 rounded-lg outline-none border-0" placeholder="Full Name">
             </div>
             <div class="mb-6 text-left">
                 <label class="block text-xs font-bold mb-2 text-gray-500 uppercase">Mobile Number</label>
-                <input type="number" id="inq-mobile" class="w-full p-3 rounded-lg outline-none border-0" placeholder="10 Digit Mobile">
+                <input type="number" id="inq-mobile" class="w-full p-3 rounded-lg outline-none border-0" placeholder="10 Digit Number">
             </div>
-            <button onclick="window.handleInquiryLogin()" class="w-full btn-gradient p-3 rounded-lg font-bold uppercase mb-4">Submit & View Portal</button>
-            <button onclick="window.hideInquiryForm()" class="text-xs text-gray-500 hover:underline">Back to Main Login</button>
+            <button onclick="window.handleInquiryLogin()" class="w-full btn-gradient p-3 rounded-lg font-bold uppercase tracking-wider mb-4">Submit & Enter</button>
+            <button onclick="window.hideInquiryForm()" class="text-xs text-gray-500 hover:underline">Back to Login</button>
         </div>
     </div>
 
@@ -72,7 +71,9 @@
     <div id="dashboard-section" class="max-w-6xl mx-auto hidden">
         <header class="flex flex-col md:flex-row justify-between items-center mb-10 border-b border-gray-800 pb-6 gap-4">
             <div class="flex items-center gap-4">
-                <div id="header-logo-container"><div class="text-3xl text-blue-400"><i class="fas fa-bolt"></i></div></div>
+                <div id="header-logo-container">
+                    <div class="text-3xl text-blue-400"><i class="fas fa-bolt"></i></div>
+                </div>
                 <div>
                     <h1 class="text-xl font-bold text-blue-400 tracking-wider">GELEXA PORTAL</h1>
                     <p class="text-xs text-gray-400" id="welcome-msg">Driven by Grit</p>
@@ -94,17 +95,17 @@
             <div id="card-recruitment" onclick="window.showView('interview')" class="glass-card p-8 cursor-pointer hover:bg-white/10 transition border-t-4 border-green-500 text-center">
                 <div class="text-green-500 text-4xl mb-4"><i class="fas fa-user-plus"></i></div>
                 <h3 class="text-xl font-bold mb-2" id="ui-c2t">Recruitment</h3>
-                <p class="text-xs text-gray-400 leading-relaxed" id="ui-c2d">Interview Submission</p>
+                <p class="text-xs text-gray-400 leading-relaxed" id="ui-c2d">Join Team</p>
             </div>
             <div id="card-training" onclick="window.showView('training')" class="glass-card p-8 cursor-pointer hover:bg-white/10 transition border-t-4 border-yellow-500 text-center">
                 <div class="text-yellow-500 text-4xl mb-4"><i class="fas fa-play-circle"></i></div>
                 <h3 class="text-xl font-bold mb-2">Training Hub</h3>
-                <p class="text-xs text-gray-400 leading-relaxed">Watch & Learn</p>
+                <p class="text-xs text-gray-400 leading-relaxed">Videos & resources.</p>
             </div>
             <div id="card-rules" onclick="window.showView('rules')" class="glass-card p-8 cursor-pointer hover:bg-white/10 transition border-t-4 border-purple-500 text-center">
                 <div class="text-purple-500 text-4xl mb-4"><i class="fas fa-book"></i></div>
                 <h3 class="text-xl font-bold mb-2">Company Rules</h3>
-                <p class="text-xs text-gray-400 leading-relaxed">Vision & Guidelines</p>
+                <p class="text-xs text-gray-400 leading-relaxed">Vision & Grit.</p>
             </div>
         </div>
 
@@ -119,37 +120,37 @@
         </div>
 
         <div id="view-profile" class="view hidden glass-card p-8 max-w-md mx-auto text-center">
-            <h2 class="text-xl font-bold mb-8 uppercase text-blue-400">My Profile Settings</h2>
+            <h2 class="text-xl font-bold mb-8 uppercase text-blue-400">Profile Settings</h2>
             <div class="space-y-4 text-left">
-                <label class="text-xs text-gray-500 font-bold uppercase">Username</label>
-                <input type="text" id="prof-user" class="w-full p-3 rounded-lg outline-none" placeholder="New Username">
-                <label class="text-xs text-gray-500 font-bold uppercase">Password</label>
+                <label class="text-xs text-gray-500 uppercase font-bold">New Username</label>
+                <input type="text" id="prof-user" class="w-full p-3 rounded-lg outline-none" placeholder="Username">
+                <label class="text-xs text-gray-500 uppercase font-bold">New Password</label>
                 <div class="pass-container">
-                    <input type="password" id="prof-pass" class="w-full p-3 rounded-lg outline-none" placeholder="New Password">
+                    <input type="password" id="prof-pass" class="w-full p-3 rounded-lg outline-none" placeholder="Password">
                     <i class="fas fa-eye pass-toggle" onclick="window.togglePass('prof-pass')"></i>
                 </div>
-                <button onclick="window.saveProfile()" class="w-full btn-gradient p-3 rounded-lg font-bold mt-4 uppercase">Update Credentials</button>
-                <button onclick="window.showView('dashboard')" class="w-full border border-gray-700 p-3 rounded-lg mt-2 font-bold uppercase">Back</button>
+                <button onclick="window.saveProfile()" class="w-full btn-gradient p-3 rounded-lg font-bold mt-4 uppercase">Update My Creds</button>
+                <button onclick="window.showView('dashboard')" class="w-full border border-gray-700 p-3 rounded-lg mt-2 font-bold">Back</button>
             </div>
         </div>
 
-        <!-- ADMIN PANEL -->
         <div id="view-admin" class="view hidden space-y-10">
-            <div class="flex justify-between items-center"><h2 class="text-3xl font-bold text-yellow-400 uppercase">Admin Control</h2></div>
+            <div class="flex justify-between items-center"><h2 class="text-3xl font-bold text-yellow-400 uppercase">Control Center</h2></div>
             <div class="flex gap-2 border-b border-gray-800 pb-2 overflow-x-auto no-scrollbar">
-                <button onclick="window.tab('resp')" class="tbtn text-blue-400 border-b-2 border-blue-400 px-4 pb-2 whitespace-nowrap uppercase text-xs">Responses</button>
-                <button onclick="window.tab('inq')" class="tbtn text-gray-500 px-4 pb-2 whitespace-nowrap uppercase text-xs">Inquiries</button>
-                <button onclick="window.tab('team')" class="tbtn text-gray-500 px-4 pb-2 whitespace-nowrap uppercase text-xs">Manage Team</button>
-                <button onclick="window.tab('form')" class="tbtn text-gray-500 px-4 pb-2 whitespace-nowrap uppercase text-xs">Forms</button>
-                <button onclick="window.tab('vids')" class="tbtn text-gray-500 px-4 pb-2 whitespace-nowrap uppercase text-xs">Videos</button>
-                <button onclick="window.tab('ui')" class="tbtn text-gray-500 px-4 pb-2 whitespace-nowrap uppercase text-xs text-red-400">Settings</button>
+                <button onclick="window.tab('resp')" class="tbtn text-blue-400 border-b-2 border-blue-400 px-4 pb-2 whitespace-nowrap">Responses</button>
+                <button onclick="window.tab('inq')" class="tbtn text-gray-500 px-4 pb-2 whitespace-nowrap">Job Inquiries</button>
+                <button onclick="window.tab('team')" class="tbtn text-gray-500 px-4 pb-2 whitespace-nowrap">Team</button>
+                <button onclick="window.tab('form')" class="tbtn text-gray-500 px-4 pb-2 whitespace-nowrap">Forms</button>
+                <button onclick="window.tab('vids')" class="tbtn text-gray-500 px-4 pb-2 whitespace-nowrap">Videos</button>
+                <button onclick="window.tab('ui')" class="tbtn text-gray-500 px-4 pb-2 whitespace-nowrap text-red-400">Settings</button>
             </div>
 
+            <!-- Admin Tabs -->
             <div id="tab-resp" class="atab space-y-8">
                 <div class="glass-card p-6">
                     <div class="flex justify-between items-center mb-6">
-                        <h3 class="font-bold text-blue-400 uppercase">Submissions</h3>
-                        <input type="text" oninput="window.renderResponses(this.value)" placeholder="Search Name..." class="p-2 text-xs rounded glass-card w-1/3 outline-none">
+                        <h3 class="font-bold text-blue-400 uppercase">Form Responses</h3>
+                        <input type="text" oninput="window.renderResponses(this.value)" placeholder="Search by name..." class="p-2 text-xs rounded glass-card w-1/3 outline-none">
                     </div>
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                         <div id="admin-resp-app" class="space-y-2"></div>
@@ -161,8 +162,8 @@
             <div id="tab-inq" class="atab hidden space-y-6">
                 <div class="glass-card p-6">
                     <div class="flex justify-between items-center mb-6">
-                        <h3 class="font-bold text-accent-blue uppercase">Candidate Inquiries</h3>
-                        <input type="text" oninput="window.renderInquiries(this.value)" placeholder="Search Inquiry..." class="p-2 text-xs rounded glass-card w-1/3 outline-none">
+                        <h3 class="font-bold text-accent-blue uppercase">Job Inquiries</h3>
+                        <input type="text" oninput="window.renderInquiries(this.value)" placeholder="Search inquiries..." class="p-2 text-xs rounded glass-card w-1/3 outline-none">
                     </div>
                     <div id="inquiry-list" class="space-y-3"></div>
                 </div>
@@ -170,14 +171,17 @@
 
             <div id="tab-team" class="atab hidden space-y-6">
                 <div class="glass-card p-6">
-                    <h3 id="team-action-title" class="font-bold mb-4 text-xs uppercase text-gray-500">Manage Members</h3>
+                    <h3 id="team-action-title" class="font-bold mb-4 text-xs uppercase text-gray-500">Manage Team</h3>
                     <div class="flex flex-col md:flex-row gap-3">
-                        <input type="hidden" id="edit-mid"><input type="text" id="m-user" placeholder="User" class="flex-1 p-2 rounded"><input type="text" id="m-pass" placeholder="Pass" class="flex-1 p-2 rounded"><button onclick="window.saveMember()" class="btn-gradient px-8 py-2 rounded font-bold uppercase">Save</button>
-                        <button id="cancel-edit-btn" onclick="window.cancelEdit()" class="hidden px-4 border border-gray-600 rounded">Cancel</button>
+                        <input type="hidden" id="edit-mid"><input type="text" id="m-user" placeholder="Username" class="flex-1 p-2 rounded"><input type="text" id="m-pass" placeholder="Password" class="flex-1 p-2 rounded"><button onclick="window.saveMember()" class="btn-gradient px-8 py-2 rounded font-bold uppercase">Save</button>
+                        <button id="cancel-edit-btn" onclick="window.cancelEdit()" class="hidden px-4 border border-gray-600 rounded">X</button>
                     </div>
                 </div>
                 <div class="glass-card p-6 overflow-x-auto">
-                    <div class="flex justify-between mb-4"><h4 class="text-xs font-bold uppercase text-gray-500">Team List</h4><input type="text" oninput="window.renderTeam(this.value)" placeholder="Search Team..." class="p-2 text-xs rounded glass-card w-1/3 outline-none"></div>
+                    <div class="mb-4 flex justify-between items-center">
+                        <h4 class="text-xs font-bold text-gray-500 uppercase">Team List</h4>
+                        <input type="text" oninput="window.renderTeam(this.value)" placeholder="Search team..." class="p-2 text-xs rounded glass-card w-1/3 outline-none">
+                    </div>
                     <table class="w-full text-left text-sm"><thead><tr class="text-gray-500 border-b border-gray-800"><th>User</th><th>Pass</th><th class="text-right">Action</th></tr></thead><tbody id="team-table"></tbody></table>
                 </div>
             </div>
@@ -186,10 +190,10 @@
                 <div class="glass-card p-6">
                     <div class="flex justify-between items-center mb-6">
                         <h3 class="font-bold uppercase">Manage Questions</h3>
-                        <input type="text" oninput="window.renderQs(this.value)" placeholder="Search Questions..." class="p-2 text-xs rounded glass-card w-1/3 outline-none">
+                        <input type="text" oninput="window.renderQs(this.value)" placeholder="Search questions..." class="p-2 text-xs rounded glass-card w-1/3 outline-none">
                     </div>
                     <div class="flex gap-3 mb-6"><select id="q-type" class="p-2 rounded text-black font-bold"><option value="appraisal">Appraisal</option><option value="interview">Interview</option></select><input type="text" id="q-text" placeholder="Add Question" class="flex-1 p-2 rounded"><button onclick="window.addQ()" class="bg-blue-600 px-6 py-2 rounded font-bold">Add</button></div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6"><div class="glass-card p-4"><h4 class="font-bold mb-2">Appraisal</h4><div id="q-list-app" class="space-y-2"></div></div><div class="glass-card p-4"><h4 class="font-bold mb-2">Interview</h4><div id="q-list-int" class="space-y-2"></div></div></div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6"><div class="glass-card p-4"><h4 class="font-bold mb-2 text-blue-400">Appraisal</h4><div id="q-list-app" class="space-y-2"></div></div><div class="glass-card p-4"><h4 class="font-bold mb-2 text-green-400">Interview</h4><div id="q-list-int" class="space-y-2"></div></div></div>
                 </div>
             </div>
 
@@ -218,13 +222,9 @@
     </div>
 
     <!-- MODALS -->
-    <div id="modal-detail" class="modal-overlay hidden"><div class="glass-card max-w-2xl w-full p-8 max-h-[85vh] overflow-y-auto"><h2 id="det-name" class="text-2xl font-bold mb-6 text-accent-blue border-b border-gray-800 pb-2 uppercase">Candidate Data</h2><div id="det-content" class="space-y-4"></div><button onclick="window.closeDet()" class="w-full py-4 mt-8 bg-gray-800 rounded-xl font-bold uppercase tracking-wider">Close</button></div></div>
-    <div id="modal-confirm" class="modal-overlay hidden"><div class="glass-card p-10 text-center max-w-sm w-full"><div class="text-4xl text-red-500 mb-4"><i class="fas fa-trash-alt"></i></div><h2 class="text-xl font-bold mb-2">Delete Permanently?</h2><div class="flex gap-4"><button id="btn-conf-yes" class="flex-1 bg-red-600 p-3 rounded-lg font-bold">Delete</button><button onclick="window.closeConf()" class="flex-1 bg-gray-700 p-3 rounded-lg font-bold">Cancel</button></div></div></div>
-    <div id="modal-thanks" class="modal-overlay hidden"><div class="glass-card p-10 text-center max-w-xs w-full"><div class="text-5xl text-green-500 mb-4"><i class="fas fa-check-circle"></i></div><h2 class="text-2xl font-bold mb-2">Thank You!</h2><p class="text-gray-400 mb-8 text-sm">Form submitted successfully.</p><button onclick="window.closeThanks()" class="w-full btn-gradient p-3 rounded-xl font-bold uppercase">Close</button></div></div>
-
-    <!-- TRAINING HUB VIEW -->
-    <div id="view-training" class="view hidden"><h2 class="text-3xl font-bold mb-10 text-center text-yellow-400 tracking-widest uppercase">Training Hub</h2><div id="video-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div><button onclick="window.showView('dashboard')" class="mt-12 mx-auto block px-12 py-3 border border-gray-700 rounded-xl uppercase font-bold text-xs">Back</button></div>
-    <div id="view-rules" class="view hidden max-w-xl mx-auto"><div class="glass-card p-10"><h2 class="text-2xl font-bold mb-8 text-purple-400 uppercase tracking-widest text-center">Ethics & Rules</h2><div class="space-y-6 text-sm text-gray-300 leading-relaxed"><div><h4 class="font-bold text-white mb-1 tracking-wider uppercase">01. Grit</h4><p>Efficiency with speed is our code.</p></div><div><h4 class="font-bold text-white mb-1 tracking-wider uppercase">02. Loyalty</h4><p>Commitment drives growth.</p></div></div><button onclick="window.showView('dashboard')" class="mt-10 w-full p-4 border border-gray-700 rounded-xl uppercase font-bold text-xs">Back</button></div></div>
+    <div id="modal-detail" class="modal-overlay hidden"><div class="glass-card max-w-2xl w-full p-8 max-h-[85vh] overflow-y-auto"><h2 id="det-name" class="text-2xl font-bold mb-6 text-accent-blue border-b border-gray-800 pb-2 uppercase">Candidate Details</h2><div id="det-content" class="space-y-4"></div><button onclick="window.closeDet()" class="w-full py-4 mt-8 bg-gray-800 rounded-xl font-bold uppercase tracking-wider">Close</button></div></div>
+    <div id="modal-confirm" class="modal-overlay hidden"><div class="glass-card p-10 text-center max-w-sm w-full"><div class="text-4xl text-red-500 mb-4"><i class="fas fa-trash-alt"></i></div><h2 class="text-xl font-bold mb-2">Are you sure?</h2><div class="flex gap-4"><button id="btn-conf-yes" class="flex-1 bg-red-600 p-3 rounded-lg font-bold">Delete</button><button onclick="window.closeConf()" class="flex-1 bg-gray-700 p-3 rounded-lg font-bold">Cancel</button></div></div></div>
+    <div id="modal-thanks" class="modal-overlay hidden"><div class="glass-card p-10 text-center max-w-xs w-full"><div class="text-5xl text-green-500 mb-4"><i class="fas fa-check-circle"></i></div><h2 class="text-2xl font-bold mb-2">Thank You!</h2><p class="text-gray-400 mb-8 text-sm">Form successfully submitted.</p><button onclick="window.closeThanks()" class="w-full btn-gradient p-3 rounded-xl font-bold uppercase">Great</button></div></div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
@@ -237,6 +237,7 @@
         let db, auth, currentUser = null, isAdmin = false, currentM = null, isNewUser = false;
         let members = [], qs = [], vids = [], resps = [], inqs = [], pendingDelete = null;
         
+        // ADMIN CREDENTIALS
         const _a = [74, 97, 116, 105, 110]; // Jatin
         const _p = [49, 50, 51, 52];       // 1234
         const _get = (arr) => arr.map(c => String.fromCharCode(c)).join('');
@@ -252,16 +253,16 @@
                 } else {
                     await signInAnonymously(auth);
                 }
-            } catch (err) { console.error("Auth Error:", err); }
+            } catch (err) { console.error("Auth failed:", err); }
         };
         initAuth();
 
         onAuthStateChanged(auth, u => {
+            currentUser = u;
             if(u) {
-                currentUser = u;
                 document.getElementById('db-status').innerText = "System Ready";
                 fetchData();
-            } else { currentUser = null; document.getElementById('db-status').innerText = "Connecting..."; }
+            } else { document.getElementById('db-status').innerText = "Connecting..."; }
         });
 
         function fetchData() {
@@ -276,7 +277,6 @@
                         document.getElementById('ui-c1d').innerText = data.c1d || "Review Form";
                         document.getElementById('ui-c2t').innerText = data.c2t || "Recruitment";
                         document.getElementById('ui-c2d').innerText = data.c2d || "Interview Form";
-                        // Populate Admin settings inputs
                         if(isAdmin) {
                             document.getElementById('set-c1t').value = data.c1t || "";
                             document.getElementById('set-c1d').value = data.c1d || "";
@@ -291,30 +291,11 @@
                 });
             }, logErr('Config'));
 
-            onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'users'), sn => { 
-                members = sn.docs.map(d => ({id:d.id, ...d.data()})); 
-                if(isAdmin) window.renderTeam(); 
-            }, logErr('Users'));
-            
-            onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'questions'), sn => { 
-                qs = sn.docs.map(d => ({id:d.id, ...d.data()})); 
-                if(isAdmin) window.renderQs(); 
-            }, logErr('Qs'));
-            
-            onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'videos'), sn => { 
-                vids = sn.docs.map(d => ({id:d.id, ...d.data()})); 
-                window.renderVids(); 
-            }, logErr('Videos'));
-            
-            onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'responses'), sn => { 
-                resps = sn.docs.map(d => ({id:d.id, ...d.data()})); 
-                if(isAdmin) window.renderResponses(); 
-            }, logErr('Responses'));
-            
-            onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'inquiries'), sn => { 
-                inqs = sn.docs.map(d => ({id:d.id, ...d.data()})); 
-                if(isAdmin) window.renderInquiries(); 
-            }, logErr('Inqs'));
+            onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'users'), sn => { members = sn.docs.map(d => ({id:d.id, ...d.data()})); if(isAdmin) window.renderTeam(); }, logErr('Users'));
+            onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'questions'), sn => { qs = sn.docs.map(d => ({id:d.id, ...d.data()})); if(isAdmin) window.renderQs(); }, logErr('Qs'));
+            onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'videos'), sn => { vids = sn.docs.map(d => ({id:d.id, ...d.data()})); window.renderVids(); }, logErr('Videos'));
+            onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'responses'), sn => { resps = sn.docs.map(d => ({id:d.id, ...d.data()})); if(isAdmin) window.renderResponses(); }, logErr('Responses'));
+            onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'inquiries'), sn => { inqs = sn.docs.map(d => ({id:d.id, ...d.data()})); if(isAdmin) window.renderInquiries(); }, logErr('Inqs'));
         }
 
         window.togglePass = (id) => {
@@ -325,12 +306,14 @@
         window.handleLogin = () => {
             const u = document.getElementById('username').value.trim();
             const p = document.getElementById('password').value.trim();
+            const err = document.getElementById('login-error');
+
             if(u === _get(_a) && p === _get(_p)) { isAdmin = true; currentM = null; isNewUser = false; loginSuccess(u); }
             else {
                 const m = members.find(x => x.username === u && x.password === p);
                 if(m) { isAdmin = false; currentM = m; isNewUser = false; loginSuccess(u); }
-                else if(u === "Team" && p === "gelexa") { isAdmin = false; currentM = null; isNewUser = false; loginSuccess("Team"); }
-                else { document.getElementById('login-error').classList.remove('hidden'); setTimeout(() => document.getElementById('login-error').classList.add('hidden'), 3000); }
+                else if(u === "Team" && p === "gelexa") { isAdmin = false; currentM = null; isNewUser = false; loginSuccess("Cheetah"); }
+                else { err.classList.remove('hidden'); setTimeout(() => err.classList.add('hidden'), 3000); }
             }
         };
 
@@ -349,12 +332,11 @@
         function loginSuccess(name) {
             document.getElementById('login-section').classList.add('hidden');
             document.getElementById('dashboard-section').classList.remove('hidden');
-            document.getElementById('welcome-msg').innerText = `${isAdmin ? 'ADMIN' : (isNewUser ? 'CANDIDATE' : 'MEMBER')}: ${name}`;
+            document.getElementById('welcome-msg').innerText = `${isAdmin ? 'ADMIN' : 'AUTHORIZED'}: ${name}`;
             if(isAdmin) { 
                 document.getElementById('admin-btn').classList.remove('hidden'); 
                 document.getElementById('profile-btn').classList.add('hidden');
                 window.showView('admin'); 
-                // Immediate refresh for Admin views
                 window.renderResponses(); window.renderInquiries(); window.renderTeam(); window.renderQs(); window.renderVids();
             } else if(isNewUser) {
                 document.getElementById('admin-btn').classList.add('hidden');
@@ -391,7 +373,6 @@
             if(event) event.target.classList.add('text-blue-400', 'border-b-2', 'border-blue-400');
         };
 
-        // --- SEARCH RENDERS ---
         window.renderTeam = (filter = "") => {
             const q = filter.toLowerCase();
             document.getElementById('team-table').innerHTML = members.filter(m => m.username.toLowerCase().includes(q)).map(m => `
@@ -426,7 +407,7 @@
                 <div class="p-4 bg-white/5 rounded-xl border border-gray-800 flex justify-between items-center">
                     <div><h4 class="font-bold text-accent-blue">${i.name}</h4><p class="text-xs text-gray-400">Mobile: ${i.mobile} | Date: ${(i.timestamp||'').split('T')[0]}</p></div>
                     <button onclick="window.delInq('${i.id}')" class="text-red-500"><i class="fas fa-trash"></i></button>
-                </div>`).join('') || `<p class="text-xs text-gray-600">No Match Found.</p>`;
+                </div>`).join('') || `<p class="text-xs text-gray-600">No match found.</p>`;
         };
 
         window.renderVids = (filter = "") => {
@@ -437,13 +418,12 @@
             if(isAdmin && adm) adm.innerHTML = filt.map(v => `<div class="p-3 glass-card flex justify-between items-center text-xs"><span>${v.title}</span><button onclick="window.delV('${v.id}')" class="text-red-500"><i class="fas fa-trash"></i></button></div>`).join('');
         };
 
-        // --- ACTIONS ---
         window.saveProfile = async () => {
             const u = document.getElementById('prof-user').value.trim(), p = document.getElementById('prof-pass').value.trim();
-            if(!u || !p || !currentM) return alert("Required!");
+            if(!u || !p || !currentM) return alert("All fields required!");
             try {
                 await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'users', currentM.id), { username:u, password:p }, { merge:true });
-                alert("Credentials Updated! Login again."); window.logout();
+                alert("Credentials updated! Re-login required."); window.logout();
             } catch(e) { console.error(e); }
         };
 
@@ -462,28 +442,27 @@
             document.getElementById('edit-mid').value = id;
             document.getElementById('m-user').value = m.username;
             document.getElementById('m-pass').value = m.password;
-            document.getElementById('team-action-title').innerText = "Editing Member: " + m.username;
+            document.getElementById('team-action-title').innerText = "Edit Member: " + m.username;
             document.getElementById('cancel-edit-btn').classList.remove('hidden');
         };
 
         window.cancelEdit = () => {
             document.getElementById('edit-mid').value=""; document.getElementById('m-user').value=""; document.getElementById('m-pass').value="";
-            document.getElementById('team-action-title').innerText = "Manage Members";
+            document.getElementById('team-action-title').innerText = "Manage Team";
             document.getElementById('cancel-edit-btn').classList.add('hidden');
         };
 
         window.addQ = async () => { if(document.getElementById('q-text').value.trim()) { await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'questions'), {type:document.getElementById('q-type').value, text:document.getElementById('q-text').value.trim()}); document.getElementById('q-text').value=""; }};
         window.addV = async () => { if(document.getElementById('v-title').value.trim()) { await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'videos'), {title:document.getElementById('v-title').value.trim(), url:document.getElementById('v-url').value.trim()}); document.getElementById('v-title').value=""; document.getElementById('v-url').value=""; }};
-        window.saveUI = async () => { await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'config', 'ui'), { c1t: document.getElementById('set-c1t').value.trim(), c1d: document.getElementById('set-c1d').value.trim(), c2t: document.getElementById('set-c2t').value.trim(), c2d: document.getElementById('set-c2d').value.trim() }, {merge:true}); alert("UI Saved!"); };
-        window.saveLogo = async () => { await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'config', 'logo'), { url: document.getElementById('set-logo').value.trim() }, {merge:true}); alert("Logo Updated!"); };
+        window.saveUI = async () => { await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'config', 'ui'), { c1t: document.getElementById('set-c1t').value.trim(), c1d: document.getElementById('set-c1d').value.trim(), c2t: document.getElementById('set-c2t').value.trim(), c2d: document.getElementById('set-c2d').value.trim() }, {merge:true}); alert("Labels updated!"); };
+        window.saveLogo = async () => { await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'config', 'logo'), { url: document.getElementById('set-logo').value.trim() }, {merge:true}); alert("Logo updated!"); };
 
-        // --- UTILS ---
         window.viewDet = (id) => {
             const r = resps.find(x => x.id === id); if(!r) return;
             document.getElementById('det-name').innerText = r.name;
             document.getElementById('det-content').innerHTML = Object.keys(r.answers || {}).map(qid => {
                 const q = qs.find(x => x.id === qid);
-                return `<div class="p-3 border-l-4 border-blue-500 bg-white/5 rounded-r-lg"><p class="text-[10px] font-bold text-gray-400 uppercase mb-1">${q ? q.text : "Deleted Q"}</p><p class="text-sm">${r.answers[qid]}</p></div>`;
+                return `<div class="p-3 border-l-4 border-blue-500 bg-white/5 rounded-r-lg"><p class="text-[10px] font-bold text-gray-500 uppercase mb-1">${q ? q.text : "Q"}</p><p class="text-sm">${r.answers[qid]}</p></div>`;
             }).join('');
             document.getElementById('modal-detail').classList.remove('hidden');
         };
