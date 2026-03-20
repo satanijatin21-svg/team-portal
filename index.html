@@ -3,100 +3,251 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gelexa Team Portal</title>
+    <title>Gelexa Team Portal | Driven by Grit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --navy: #00004d;
-            --electric-blue: #007bff;
-            --white: #ffffff;
+            --navy: #000814;
+            --electric-blue: #0077b6;
+            --accent-blue: #00b4d8;
         }
-        body { font-family: 'Segoe UI', sans-serif; background-color: var(--navy); color: var(--white); margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-        .container { background: rgba(255, 255, 255, 0.05); padding: 30px; border-radius: 15px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); width: 90%; max-width: 500px; text-align: center; border: 1px solid rgba(255,255,255,0.1); }
-        h2 { color: var(--electric-blue); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
-        input, select, textarea { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: none; background: rgba(255,255,255,0.9); font-size: 16px; box-sizing: border-box; }
-        button { width: 100%; padding: 12px; background: var(--electric-blue); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 18px; margin-top: 10px; }
-        button:hover { background: #0056b3; transform: scale(1.02); }
+        body {
+            background-color: var(--navy);
+            color: white;
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+        }
+        .btn-gradient {
+            background: linear-gradient(135deg, var(--electric-blue), var(--accent-blue));
+            transition: all 0.3s ease;
+        }
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 119, 182, 0.4);
+        }
+        input, textarea, select {
+            background: rgba(255, 255, 255, 0.1) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            color: white !important;
+        }
+        .cheetah-logo {
+            font-size: 3rem;
+            background: -webkit-linear-gradient(#00b4d8, #0077b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
         .hidden { display: none; }
-        .logo { width: 100px; margin-bottom: 10px; }
     </style>
 </head>
-<body>
+<body class="p-4 md:p-10">
 
-<div class="container" id="login-box">
-    <h2>GELEXA LOGIN</h2>
-    <p>Welcome, Cheetah! Login to Drive the Brand.</p>
-    <input type="text" id="username" placeholder="Team Member Name">
-    <input type="password" id="password" placeholder="Password">
-    <button onclick="checkLogin()">Login</button>
-</div>
+    <!-- LOGIN SECTION -->
+    <div id="login-section" class="max-w-md mx-auto mt-20 text-center">
+        <div class="cheetah-logo mb-4"><i class="fas fa-bolt"></i></div>
+        <h1 class="text-3xl font-bold mb-2">GELEXA LOGIN</h1>
+        <p class="text-gray-400 mb-8">Welcome Cheetah! Login to Drive the Brand.</p>
+        
+        <div class="glass-card p-8">
+            <div class="mb-4 text-left">
+                <label class="block text-sm mb-2 text-gray-400">Team Member Name</label>
+                <input type="text" id="username" class="w-full p-3 rounded-lg outline-none" placeholder="Enter your name">
+            </div>
+            <div class="mb-6 text-left">
+                <label class="block text-sm mb-2 text-gray-400">Password</label>
+                <input type="password" id="password" class="w-full p-3 rounded-lg outline-none" placeholder="••••••••">
+            </div>
+            <button onclick="handleLogin()" class="w-full btn-gradient p-3 rounded-lg font-bold">Login Now</button>
+            <p id="login-error" class="text-red-500 mt-4 text-sm hidden">Invalid credentials. Only Cheetahs allowed!</p>
+        </div>
+    </div>
 
-<div class="container hidden" id="dashboard">
-    <h2>DASHBOARD</h2>
-    <p>Select an option to continue:</p>
-    <button onclick="showForm('appraisal')">Appraisal Form</button>
-    <button onclick="showForm('interview')">Interview Form (Recruitment)</button>
-    <button style="background: gray;" onclick="logout()">Logout</button>
-</div>
+    <!-- MAIN DASHBOARD -->
+    <div id="dashboard-section" class="max-w-6xl mx-auto hidden">
+        <header class="flex justify-between items-center mb-10 border-b border-gray-800 pb-6">
+            <div>
+                <h1 class="text-2xl font-bold text-blue-400">GELEXA PORTAL</h1>
+                <p class="text-sm text-gray-400">Driven by Grit, Scaling Your Brand</p>
+            </div>
+            <button onclick="logout()" class="bg-red-900/30 text-red-400 px-4 py-2 rounded-lg border border-red-900/50">Logout</button>
+        </header>
 
-<div class="container hidden" id="appraisal-form">
-    <h2>APPRAISAL FORM</h2>
-    <form action="YOUR_GOOGLE_FORM_LINK_HERE" method="POST">
-        <input type="text" placeholder="તમે નવી કઈ સ્કીલ શીખ્યા?" required>
-        <textarea placeholder="ઓફિસની બહાર તમે શું ઇમ્પ્લીમેન્ટ કર્યું?"></textarea>
-        <input type="number" placeholder="Expected Increment (₹)" required>
-        <textarea placeholder="નવા વર્ષ માટે તમારું કમિટમેન્ટ શું છે?"></textarea>
-        <button type="submit">Submit Appraisal</button>
-        <button type="button" onclick="goBack()" style="background:none; border:1px solid white;">Back</button>
-    </form>
-</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <!-- Card 1 -->
+            <div onclick="showView('appraisal')" class="glass-card p-6 cursor-pointer hover:bg-white/10 transition">
+                <div class="text-blue-400 text-3xl mb-4"><i class="fas fa-chart-line"></i></div>
+                <h3 class="text-xl font-bold mb-2">Annual Appraisal</h3>
+                <p class="text-sm text-gray-400">પગાર વધારા અને વર્ષના રિવ્યુ માટેનું ફોર્મ.</p>
+            </div>
+            <!-- Card 2 -->
+            <div onclick="showView('interview')" class="glass-card p-6 cursor-pointer hover:bg-white/10 transition">
+                <div class="text-green-400 text-3xl mb-4"><i class="fas fa-user-plus"></i></div>
+                <h3 class="text-xl font-bold mb-2">Recruitment</h3>
+                <p class="text-sm text-gray-400">નવા મેમ્બર્સ માટે ઇન્ટરવ્યુ અને હાયરિંગ ફોર્મ.</p>
+            </div>
+            <!-- Card 3 -->
+            <div onclick="showView('training')" class="glass-card p-6 cursor-pointer hover:bg-white/10 transition">
+                <div class="text-yellow-400 text-3xl mb-4"><i class="fas fa-play-circle"></i></div>
+                <h3 class="text-xl font-bold mb-2">Training Hub</h3>
+                <p class="text-sm text-gray-400">સ્કીલ્સ અને કામ શીખવા માટેના વિડિયો લાઈબ્રેરી.</p>
+            </div>
+            <!-- Card 4 -->
+            <div onclick="showView('rules')" class="glass-card p-6 cursor-pointer hover:bg-white/10 transition">
+                <div class="text-purple-400 text-3xl mb-4"><i class="fas fa-book"></i></div>
+                <h3 class="text-xl font-bold mb-2">Grit & Rules</h3>
+                <p class="text-sm text-gray-400">Gelexa ના વિઝન અને ઓફિસના નિયમો.</p>
+            </div>
+        </div>
 
-<div class="container hidden" id="interview-form">
-    <h2>INTERVIEW FORM</h2>
-    <form action="YOUR_GOOGLE_FORM_LINK_HERE" method="POST">
-        <input type="text" placeholder="તમારું નામ" required>
-        <select required>
-            <option value="">પોઝિશન પસંદ કરો</option>
-            <option>Graphic Designer</option>
-            <option>Video Editor</option>
-            <option>Web Developer</option>
-        </select>
-        <textarea placeholder="શા માટે Gelexa જોઈન કરવું છે?"></textarea>
-        <p style="font-size: 12px;">શું તમે 1 વર્ષના બોન્ડ માટે તૈયાર છો? <input type="checkbox" required></p>
-        <input type="number" placeholder="Expected Salary">
-        <button type="submit">Apply Now</button>
-        <button type="button" onclick="goBack()" style="background:none; border:1px solid white;">Back</button>
-    </form>
-</div>
+        <!-- FORM: APPRAISAL -->
+        <div id="view-appraisal" class="view hidden glass-card p-8 max-w-2xl mx-auto">
+            <h2 class="text-2xl font-bold mb-6 text-blue-400">Annual Growth & Appraisal Form</h2>
+            <form action="YOUR_GOOGLE_FORM_LINK" method="POST" class="space-y-4 text-left">
+                <div>
+                    <label class="block mb-1">આ વર્ષમાં તમે કઈ નવી સ્કીલ શીખ્યા? (Office સિવાય)</label>
+                    <textarea class="w-full p-3 rounded-lg" rows="2" placeholder="Ex: AI Tools, New Software..."></textarea>
+                </div>
+                <div>
+                    <label class="block mb-1">તમે જાતે નવું શું ઈમ્પ્લીમેન્ટ કર્યું જેનાથી Gelexa ને ફાયદો થયો?</label>
+                    <textarea class="w-full p-3 rounded-lg" rows="2"></textarea>
+                </div>
+                <div>
+                    <label class="block mb-1">તમારા મતે કેટલું પગાર વધારવું જોઈએ (₹)?</label>
+                    <input type="number" class="w-full p-3 rounded-lg">
+                </div>
+                <div>
+                    <label class="block mb-1">જો વધારો મળે, તો તમે કામમાં શું 'Plus' કરીને આપશો?</label>
+                    <textarea class="w-full p-3 rounded-lg" rows="2"></textarea>
+                </div>
+                <div class="flex gap-4">
+                    <button type="submit" class="flex-1 btn-gradient p-3 rounded-lg">Submit Review</button>
+                    <button type="button" onclick="showView('dashboard')" class="px-6 border border-gray-600 rounded-lg">Back</button>
+                </div>
+            </form>
+        </div>
 
-<script>
-    function checkLogin() {
-        const user = document.getElementById('username').value;
-        const pass = document.getElementById('password').value;
-        // Basic Security: તું અહિયાં તારા પાસવર્ડ સેટ કરી શકે છે
-        if(user === "gelexa_team" && pass === "grit2026") {
-            document.getElementById('login-box').classList.add('hidden');
-            document.getElementById('dashboard').classList.remove('hidden');
-        } else {
-            alert("Wrong Details! Only Cheetahs allowed.");
+        <!-- FORM: INTERVIEW -->
+        <div id="view-interview" class="view hidden glass-card p-8 max-w-2xl mx-auto">
+            <h2 class="text-2xl font-bold mb-6 text-green-400">Candidate Recruitment Form</h2>
+            <form action="YOUR_GOOGLE_FORM_LINK" method="POST" class="space-y-4 text-left">
+                <input type="text" placeholder="Full Name" class="w-full p-3 rounded-lg" required>
+                <select class="w-full p-3 rounded-lg">
+                    <option>Applying for Position...</option>
+                    <option>Graphic Designer</option>
+                    <option>Video Editor</option>
+                    <option>Web Developer</option>
+                </select>
+                <div>
+                    <label class="block mb-1">શા માટે Gelexa? (Why do you want to join?)</label>
+                    <textarea class="w-full p-3 rounded-lg" rows="2"></textarea>
+                </div>
+                <div class="flex items-center gap-3">
+                    <input type="checkbox" id="bond" required>
+                    <label for="bond">I am comfortable with the 1-year bond.</label>
+                </div>
+                <input type="number" placeholder="Expected Salary (₹)" class="w-full p-3 rounded-lg">
+                <div class="flex gap-4">
+                    <button type="submit" class="flex-1 bg-green-600 p-3 rounded-lg font-bold">Submit Application</button>
+                    <button type="button" onclick="showView('dashboard')" class="px-6 border border-gray-600 rounded-lg">Back</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- VIEW: TRAINING -->
+        <div id="view-training" class="view hidden text-center">
+            <h2 class="text-3xl font-bold mb-8">Gelexa Training Center</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-card p-6">
+                    <div class="aspect-video bg-gray-800 rounded-lg mb-4 flex items-center justify-center">
+                        <i class="fas fa-play text-4xl text-blue-500"></i>
+                    </div>
+                    <h4 class="font-bold">Company Rules & Onboarding</h4>
+                </div>
+                <div class="glass-card p-6 opacity-50">
+                    <div class="aspect-video bg-gray-800 rounded-lg mb-4 flex items-center justify-center">
+                        <i class="fas fa-lock text-4xl"></i>
+                    </div>
+                    <h4 class="font-bold">Design Mastery (Coming Soon)</h4>
+                </div>
+                <div class="glass-card p-6 opacity-50">
+                    <div class="aspect-video bg-gray-800 rounded-lg mb-4 flex items-center justify-center">
+                        <i class="fas fa-lock text-4xl"></i>
+                    </div>
+                    <h4 class="font-bold">Web Development (Coming Soon)</h4>
+                </div>
+            </div>
+            <button onclick="showView('dashboard')" class="mt-10 px-10 py-3 border border-gray-600 rounded-lg">Back to Dashboard</button>
+        </div>
+
+        <!-- VIEW: RULES -->
+        <div id="view-rules" class="view hidden max-w-3xl mx-auto text-left">
+            <div class="glass-card p-10">
+                <h2 class="text-3xl font-bold mb-6 text-purple-400">Company Vision & Rules</h2>
+                <div class="space-y-6 text-gray-300">
+                    <section>
+                        <h4 class="text-white font-bold mb-2">1. Our Mission</h4>
+                        <p>Gelexa એ કોઈ સાદી એજન્સી નથી, તે ગ્રાઉન્ડ લેવલથી ગ્લોબલ લેવલ સુધી પહોંચવાનું એક માધ્યમ છે. અમે 'Grit' માં માનીએ છીએ.</p>
+                    </section>
+                    <section>
+                        <h4 class="text-white font-bold mb-2">2. Team Loyalty (Bond)</h4>
+                        <p>દરેક મેમ્બર માટે ૧ વર્ષનો બોન્ડ ફરજિયાત છે જેથી આપણે સાથે ગ્રો થઈ શકીએ અને ક્લાયન્ટને બેસ્ટ સર્વિસ આપી શકીએ.</p>
+                    </section>
+                    <section>
+                        <h4 class="text-white font-bold mb-2">3. Self-Learning Culture</h4>
+                        <p>અહીંયા અમે માત્ર કામ નથી કરાવતા, પણ શીખવાડીએ પણ છીએ. જો તમે જાતે ઘરેથી કંઈક નવું શીખીને ઈમ્પ્લીમેન્ટ કરશો, તો તમારી વેલ્યુ Gelexa માં સૌથી વધુ રહેશે.</p>
+                    </div>
+                </div>
+                <button onclick="showView('dashboard')" class="mt-8 w-full p-3 border border-gray-600 rounded-lg">Back to Dashboard</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // CONFIGURATION
+        const CONFIG = {
+            username: "Jatin",
+            password: "1234"
+        };
+
+        function handleLogin() {
+            const u = document.getElementById('username').value;
+            const p = document.getElementById('password').value;
+            const error = document.getElementById('login-error');
+
+            if (u === CONFIG.username && p === CONFIG.password) {
+                document.getElementById('login-section').classList.add('hidden');
+                document.getElementById('dashboard-section').classList.remove('hidden');
+                error.classList.add('hidden');
+            } else {
+                error.classList.remove('hidden');
+            }
         }
-    }
 
-    function showForm(type) {
-        document.getElementById('dashboard').classList.add('hidden');
-        if(type === 'appraisal') document.getElementById('appraisal-form').classList.remove('hidden');
-        if(type === 'interview') document.getElementById('interview-form').classList.remove('hidden');
-    }
+        function showView(viewId) {
+            // Hide all views and dashboard options
+            document.querySelectorAll('.view').forEach(v => v.classList.add('hidden'));
+            
+            if (viewId === 'dashboard') {
+                // Show grid, hide specific views
+                document.querySelector('.grid').classList.remove('hidden');
+            } else {
+                document.querySelector('.grid').classList.add('hidden');
+                document.getElementById('view-' + viewId).classList.remove('hidden');
+            }
+        }
 
-    function goBack() {
-        document.getElementById('appraisal-form').classList.add('hidden');
-        document.getElementById('interview-form').classList.add('hidden');
-        document.getElementById('dashboard').classList.remove('hidden');
-    }
+        function logout() {
+            location.reload();
+        }
 
-    function logout() {
-        location.reload();
-    }
-</script>
-
+        function toggleMenu() {
+            // Mobile menu logic if needed
+        }
+    </script>
 </body>
 </html>
