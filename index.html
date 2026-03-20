@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="gu">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,7 +32,7 @@
             <div class="text-5xl text-blue-500"><i class="fas fa-bolt"></i></div>
         </div>
         <h1 class="text-3xl font-bold mb-2 uppercase tracking-widest">Gelexa Login</h1>
-        <p class="text-gray-400 mb-8" id="db-status">System Standby</p>
+        <p class="text-gray-400 mb-8" id="db-status">System Ready (Local Storage)</p>
         
         <!-- Main Login Card -->
         <div id="main-login-card" class="glass-card p-8 shadow-2xl">
@@ -48,20 +48,20 @@
                 </div>
             </div>
             <button id="login-btn" onclick="window.handleLogin()" class="w-full btn-gradient p-3 rounded-lg font-bold uppercase tracking-wider mb-4">Login Now</button>
-            <button onclick="window.showInquiryForm()" class="text-xs text-accent-blue hover:underline">Apply for Job? New User Inquiry</button>
-            <p id="login-error" class="text-red-500 mt-4 text-xs font-bold hidden">Invalid credentials. Access Denied!</p>
+            <button onclick="window.showInquiryForm()" class="text-xs text-accent-blue hover:underline">New Job Inquiry? Click here</button>
+            <p id="login-error" class="text-red-500 mt-4 text-xs font-bold hidden">Invalid credentials! Please try again.</p>
         </div>
 
-        <!-- Job Inquiry Login Card -->
+        <!-- Inquiry Form Card -->
         <div id="inquiry-login-card" class="glass-card p-8 shadow-2xl hidden">
-            <h2 class="text-xl font-bold mb-4 uppercase text-accent-blue">Candidate Access</h2>
+            <h2 class="text-xl font-bold mb-4 uppercase text-accent-blue">Candidate Entry</h2>
             <div class="mb-4 text-left">
                 <label class="block text-xs font-bold mb-2 text-gray-500 uppercase">Your Full Name</label>
-                <input type="text" id="inq-name" class="w-full p-3 rounded-lg outline-none border-0" placeholder="Full Name">
+                <input type="text" id="inq-name" class="w-full p-3 rounded-lg outline-none border-0" placeholder="Enter name">
             </div>
             <div class="mb-6 text-left">
                 <label class="block text-xs font-bold mb-2 text-gray-500 uppercase">Mobile Number</label>
-                <input type="number" id="inq-mobile" class="w-full p-3 rounded-lg outline-none border-0" placeholder="10 Digit Number">
+                <input type="number" id="inq-mobile" class="w-full p-3 rounded-lg outline-none border-0" placeholder="10-digit number">
             </div>
             <button onclick="window.handleInquiryLogin()" class="w-full btn-gradient p-3 rounded-lg font-bold uppercase mb-4 tracking-wider">Submit & Enter</button>
             <button onclick="window.hideInquiryForm()" class="text-xs text-gray-500 hover:underline">Back to Login</button>
@@ -75,7 +75,7 @@
                 <div id="header-logo-container"><div class="text-3xl text-blue-400"><i class="fas fa-bolt"></i></div></div>
                 <div>
                     <h1 class="text-xl font-bold text-blue-400 tracking-wider uppercase">GELEXA PORTAL</h1>
-                    <p class="text-xs text-gray-400" id="welcome-msg">Authorized Access Only</p>
+                    <p class="text-xs text-gray-400" id="welcome-msg">Driven by Grit</p>
                 </div>
             </div>
             <div class="flex flex-wrap justify-center gap-3">
@@ -85,21 +85,22 @@
             </div>
         </header>
 
+        <!-- DASHBOARD CARDS -->
         <div id="dashboard-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             <div id="card-appraisal" onclick="window.showView('appraisal')" class="glass-card p-8 cursor-pointer hover:bg-white/10 transition border-t-4 border-blue-500 text-center">
                 <div class="text-blue-500 text-4xl mb-4"><i class="fas fa-chart-line"></i></div>
                 <h3 class="text-xl font-bold mb-2" id="ui-c1t">Annual Appraisal</h3>
-                <p class="text-xs text-gray-400 leading-relaxed" id="ui-c1d">Review Form</p>
+                <p class="text-xs text-gray-400 leading-relaxed" id="ui-c1d">Salary and performance review.</p>
             </div>
             <div id="card-recruitment" onclick="window.showView('interview')" class="glass-card p-8 cursor-pointer hover:bg-white/10 transition border-t-4 border-green-500 text-center">
                 <div class="text-green-500 text-4xl mb-4"><i class="fas fa-user-plus"></i></div>
                 <h3 class="text-xl font-bold mb-2" id="ui-c2t">Recruitment</h3>
-                <p class="text-xs text-gray-400 leading-relaxed" id="ui-c2d">Interview Submission</p>
+                <p class="text-xs text-gray-400 leading-relaxed" id="ui-c2d">New hire interview form.</p>
             </div>
             <div id="card-training" onclick="window.showView('training')" class="glass-card p-8 cursor-pointer hover:bg-white/10 transition border-t-4 border-yellow-500 text-center">
                 <div class="text-yellow-500 text-4xl mb-4"><i class="fas fa-play-circle"></i></div>
                 <h3 class="text-xl font-bold mb-2">Training Hub</h3>
-                <p class="text-xs text-gray-400 leading-relaxed">Watch & Learn</p>
+                <p class="text-xs text-gray-400 leading-relaxed">Watch & Learn skills.</p>
             </div>
             <div id="card-rules" onclick="window.showView('rules')" class="glass-card p-8 cursor-pointer hover:bg-white/10 transition border-t-4 border-purple-500 text-center">
                 <div class="text-purple-500 text-4xl mb-4"><i class="fas fa-book"></i></div>
@@ -108,49 +109,49 @@
             </div>
         </div>
 
-        <!-- VIEW: Form -->
+        <!-- VIEWS -->
         <div id="view-form" class="view hidden glass-card p-8 max-w-2xl mx-auto shadow-2xl">
-            <h2 id="form-title" class="text-2xl font-bold mb-8 text-center text-accent-blue uppercase tracking-widest">Form</h2>
+            <h2 id="form-title" class="text-2xl font-bold mb-8 text-center text-accent-blue uppercase">Form</h2>
             <div id="form-questions-container" class="space-y-6"></div>
             <div class="mt-10 flex gap-4">
                 <button id="form-submit-btn" class="flex-1 btn-gradient p-4 rounded-xl font-bold uppercase">Submit Now</button>
-                <button onclick="window.showView('dashboard')" class="px-8 border border-gray-700 rounded-xl font-bold">Cancel</button>
+                <button onclick="window.showView('dashboard')" class="px-8 border border-gray-700 rounded-xl font-bold">Back</button>
             </div>
         </div>
 
-        <!-- VIEW: Profile -->
         <div id="view-profile" class="view hidden glass-card p-8 max-w-md mx-auto text-center">
             <h2 class="text-xl font-bold mb-8 uppercase text-blue-400">Profile Settings</h2>
             <div class="space-y-4 text-left">
-                <label class="text-xs text-gray-500 uppercase font-bold">Username</label>
-                <input type="text" id="prof-user" class="w-full p-3 rounded-lg outline-none" placeholder="Username">
-                <label class="text-xs text-gray-500 uppercase font-bold">Password</label>
+                <label class="text-xs text-gray-500 uppercase font-bold">New Username</label>
+                <input type="text" id="prof-user" class="w-full p-3 rounded-lg outline-none">
+                <label class="text-xs text-gray-500 uppercase font-bold">New Password</label>
                 <div class="pass-container">
-                    <input type="password" id="prof-pass" class="w-full p-3 rounded-lg outline-none" placeholder="Password">
+                    <input type="password" id="prof-pass" class="w-full p-3 rounded-lg outline-none">
                     <i class="fas fa-eye pass-toggle" id="eye-prof" onclick="window.togglePass('prof-pass', 'eye-prof')"></i>
                 </div>
-                <button onclick="window.saveProfile()" class="w-full btn-gradient p-3 rounded-lg font-bold mt-4 uppercase">Update My Creds</button>
+                <button onclick="window.saveProfile()" class="w-full btn-gradient p-3 rounded-lg font-bold mt-4 uppercase">Update Data</button>
                 <button onclick="window.showView('dashboard')" class="w-full border border-gray-700 p-3 rounded-lg mt-2 font-bold uppercase">Back</button>
             </div>
         </div>
 
-        <!-- VIEW: Admin -->
+        <!-- ADMIN PANEL -->
         <div id="view-admin" class="view hidden space-y-10">
             <div class="flex justify-between items-center"><h2 class="text-3xl font-bold text-yellow-400 uppercase">Control Center</h2></div>
             <div class="flex gap-2 border-b border-gray-800 pb-2 overflow-x-auto no-scrollbar">
                 <button onclick="window.tab('resp')" id="btn-tab-resp" class="atbtn text-blue-400 border-b-2 border-blue-400 px-4 pb-2 whitespace-nowrap uppercase text-xs">Responses</button>
                 <button onclick="window.tab('inq')" id="btn-tab-inq" class="atbtn text-gray-500 px-4 pb-2 whitespace-nowrap uppercase text-xs">Job Inquiries</button>
                 <button onclick="window.tab('team')" id="btn-tab-team" class="atbtn text-gray-500 px-4 pb-2 whitespace-nowrap uppercase text-xs">Manage Team</button>
-                <button onclick="window.tab('form')" id="btn-tab-form" class="atbtn text-gray-500 px-4 pb-2 whitespace-nowrap uppercase text-xs">Forms</button>
+                <button onclick="window.tab('form')" id="btn-tab-form" class="atbtn text-gray-500 px-4 pb-2 whitespace-nowrap uppercase text-xs">Forms Qs</button>
                 <button onclick="window.tab('vids')" id="btn-tab-vids" class="atbtn text-gray-500 px-4 pb-2 whitespace-nowrap uppercase text-xs">Videos</button>
                 <button onclick="window.tab('ui')" id="btn-tab-ui" class="atbtn text-gray-500 px-4 pb-2 whitespace-nowrap uppercase text-xs text-red-400">Settings</button>
             </div>
 
+            <!-- Admin Tabs Content -->
             <div id="tab-resp" class="atab space-y-6">
                 <div class="glass-card p-6">
                     <div class="flex justify-between items-center mb-6">
                         <h3 class="font-bold text-blue-400 uppercase">Submissions</h3>
-                        <input type="text" oninput="window.renderResponses(this.value)" placeholder="Search submissions..." class="p-2 text-xs rounded glass-card w-1/3 outline-none">
+                        <input type="text" oninput="window.renderResponses(this.value)" placeholder="Search..." class="p-2 text-xs rounded glass-card w-1/3 outline-none">
                     </div>
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                         <div id="admin-resp-app" class="space-y-2"></div>
@@ -162,8 +163,8 @@
             <div id="tab-inq" class="atab hidden space-y-6">
                 <div class="glass-card p-6">
                     <div class="flex justify-between items-center mb-6">
-                        <h3 class="font-bold text-accent-blue uppercase">Job Inquiries</h3>
-                        <input type="text" oninput="window.renderInquiries(this.value)" placeholder="Search inquiries..." class="p-2 text-xs rounded glass-card w-1/3 outline-none">
+                        <h3 class="font-bold text-accent-blue uppercase">Candidate Leads</h3>
+                        <input type="text" oninput="window.renderInquiries(this.value)" placeholder="Search leads..." class="p-2 text-xs rounded glass-card w-1/3 outline-none">
                     </div>
                     <div id="inquiry-list" class="space-y-3"></div>
                 </div>
@@ -173,15 +174,12 @@
                 <div class="glass-card p-6">
                     <h3 id="team-action-title" class="font-bold mb-4 text-xs uppercase text-gray-500">Manage Members</h3>
                     <div class="flex flex-col md:flex-row gap-3">
-                        <input type="hidden" id="edit-mid"><input type="text" id="m-user" placeholder="Username" class="flex-1 p-2 rounded"><input type="text" id="m-pass" placeholder="Password" class="flex-1 p-2 rounded"><button onclick="window.saveMember()" class="btn-gradient px-8 py-2 rounded font-bold uppercase">Save</button>
-                        <button id="cancel-edit-btn" onclick="window.cancelEdit()" class="hidden px-4 border border-gray-600 rounded">X</button>
+                        <input type="hidden" id="edit-mid"><input type="text" id="m-user" placeholder="User" class="flex-1 p-2 rounded"><input type="text" id="m-pass" placeholder="Pass" class="flex-1 p-2 rounded"><button onclick="window.saveMember()" class="btn-gradient px-8 py-2 rounded font-bold uppercase">Save Member</button>
+                        <button id="cancel-edit-btn" onclick="window.cancelEdit()" class="hidden px-4 border border-gray-600 rounded">Cancel</button>
                     </div>
                 </div>
                 <div class="glass-card p-6 overflow-x-auto">
-                    <div class="flex justify-between mb-4">
-                        <h4 class="text-xs font-bold uppercase text-gray-500">Team List</h4>
-                        <input type="text" oninput="window.renderTeam(this.value)" placeholder="Search team..." class="p-2 text-xs rounded glass-card w-1/3 outline-none">
-                    </div>
+                    <div class="flex justify-between mb-4"><h4 class="text-xs font-bold uppercase text-gray-500">Members List</h4><input type="text" oninput="window.renderTeam(this.value)" placeholder="Search team..." class="p-2 text-xs rounded glass-card w-1/3 outline-none"></div>
                     <table class="w-full text-left text-sm"><thead><tr class="text-gray-500 border-b border-gray-800"><th>User</th><th>Pass</th><th class="text-right">Action</th></tr></thead><tbody id="team-table"></tbody></table>
                 </div>
             </div>
@@ -192,14 +190,14 @@
                         <h3 class="font-bold uppercase text-xs">Questions Management</h3>
                         <input type="text" oninput="window.renderQs(this.value)" placeholder="Search Qs..." class="p-2 text-xs rounded glass-card w-1/3 outline-none">
                     </div>
-                    <div class="flex gap-3 mb-6"><select id="q-type" class="p-2 rounded text-black font-bold"><option value="appraisal">Appraisal</option><option value="interview">Interview</option></select><input type="text" id="q-text" placeholder="Add New Question" class="flex-1 p-2 rounded"><button onclick="window.addQ()" class="bg-blue-600 px-6 py-2 rounded font-bold uppercase text-xs">Add</button></div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6"><div class="glass-card p-4"><h4 class="font-bold mb-2">Appraisal</h4><div id="q-list-app" class="space-y-2"></div></div><div class="glass-card p-4"><h4 class="font-bold mb-2">Interview</h4><div id="q-list-int" class="space-y-2"></div></div></div>
+                    <div class="flex gap-3 mb-6"><select id="q-type" class="p-2 rounded text-black font-bold"><option value="appraisal">Appraisal</option><option value="interview">Interview</option></select><input type="text" id="q-text" placeholder="Add Question" class="flex-1 p-2 rounded"><button onclick="window.addQ()" class="bg-blue-600 px-6 py-2 rounded font-bold uppercase text-xs">Add</button></div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6"><div class="glass-card p-4"><h4 class="font-bold mb-2 text-blue-400 uppercase text-xs">Appraisal Qs</h4><div id="q-list-app" class="space-y-2"></div></div><div class="glass-card p-4"><h4 class="font-bold mb-2 text-green-400 uppercase text-xs">Interview Qs</h4><div id="q-list-int" class="space-y-2"></div></div></div>
                 </div>
             </div>
 
             <div id="tab-vids" class="atab hidden space-y-6">
                 <div class="glass-card p-6">
-                    <div class="flex gap-3 mb-4"><input type="text" id="v-title" placeholder="Title" class="flex-1 p-2 rounded"><input type="text" id="v-url" placeholder="YouTube Embed URL" class="flex-1 p-2 rounded"><button onclick="window.addV()" class="bg-yellow-600 px-6 py-2 rounded font-bold text-xs uppercase">Add Video</button></div>
+                    <div class="flex gap-3 mb-4"><input type="text" id="v-title" placeholder="Title" class="flex-1 p-2 rounded"><input type="text" id="v-url" placeholder="YouTube Embed URL" class="flex-1 p-2 rounded"><button onclick="window.addV()" class="bg-yellow-600 px-6 py-2 rounded font-bold text-xs uppercase">Add</button></div>
                     <input type="text" oninput="window.renderVids(this.value)" placeholder="Search videos..." class="p-2 text-xs rounded glass-card w-full outline-none mb-4">
                     <div id="admin-v-list" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
                 </div>
@@ -207,106 +205,61 @@
 
             <div id="tab-ui" class="atab hidden space-y-6">
                 <div class="glass-card p-8 grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <input type="text" id="set-c1t" class="p-2 rounded" placeholder="Card 1 Title">
-                    <input type="text" id="set-c1d" class="p-2 rounded" placeholder="Card 1 Desc">
-                    <input type="text" id="set-c2t" class="p-2 rounded" placeholder="Card 2 Title">
-                    <input type="text" id="set-c2d" class="p-2 rounded" placeholder="Card 2 Desc">
-                    <button onclick="window.saveUI()" class="btn-gradient p-3 rounded font-bold md:col-span-2 uppercase">Update Dashboard</button>
+                    <input type="text" id="set-c1t" class="p-2 rounded" placeholder="Appraisal Title">
+                    <input type="text" id="set-c1d" class="p-2 rounded" placeholder="Appraisal Desc">
+                    <input type="text" id="set-c2t" class="p-2 rounded" placeholder="Recruitment Title">
+                    <input type="text" id="set-c2d" class="p-2 rounded" placeholder="Recruitment Desc">
+                    <button onclick="window.saveUI()" class="btn-gradient p-3 rounded font-bold md:col-span-2 uppercase">Update Dashboard UI</button>
                 </div>
                 <div class="glass-card p-8 flex flex-col items-center">
                     <input type="text" id="set-logo" class="w-full p-2 rounded mb-4" placeholder="Company Logo URL">
-                    <button onclick="window.saveLogo()" class="w-full btn-gradient p-2 rounded font-bold uppercase">Update Logo</button>
+                    <button onclick="window.saveLogo()" class="w-full btn-gradient p-2 rounded font-bold uppercase">Save Company Logo</button>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- MODALS -->
-    <div id="modal-detail" class="modal-overlay hidden"><div class="glass-card max-w-2xl w-full p-8 max-h-[85vh] overflow-y-auto m-4"><h2 id="det-name" class="text-2xl font-bold mb-6 text-accent-blue border-b border-gray-800 pb-2 uppercase">Form Review</h2><div id="det-content" class="space-y-4"></div><button onclick="window.closeDet()" class="w-full py-4 mt-8 bg-gray-800 rounded-xl font-bold uppercase">Close</button></div></div>
-    <div id="modal-confirm" class="modal-overlay hidden"><div class="glass-card p-10 text-center max-w-sm w-full"><div class="text-4xl text-red-500 mb-4"><i class="fas fa-trash-alt"></i></div><h2 class="text-xl font-bold mb-2 uppercase">Confirm Delete?</h2><div class="flex gap-4"><button id="btn-conf-yes" class="flex-1 bg-red-600 p-3 rounded-lg font-bold uppercase">Delete</button><button onclick="window.closeConf()" class="flex-1 bg-gray-700 p-3 rounded-lg font-bold uppercase">Cancel</button></div></div></div>
-    <div id="modal-thanks" class="modal-overlay hidden"><div class="glass-card p-10 text-center max-w-xs w-full"><div class="text-5xl text-green-500 mb-4"><i class="fas fa-check-circle"></i></div><h2 class="text-2xl font-bold mb-2">Thank You!</h2><p class="text-gray-400 mb-8 text-sm">Thank You, your form is fillup.</p><button onclick="window.closeThanks()" class="w-full btn-gradient p-3 rounded-xl font-bold uppercase">Done</button></div></div>
+    <div id="modal-detail" class="modal-overlay hidden"><div class="glass-card max-w-2xl w-full p-8 max-h-[85vh] overflow-y-auto m-4"><h2 id="det-name" class="text-2xl font-bold mb-6 text-accent-blue border-b border-gray-800 pb-2 uppercase text-center">Data Details</h2><div id="det-content" class="space-y-4"></div><button onclick="window.closeDet()" class="w-full py-4 mt-8 bg-gray-800 rounded-xl font-bold uppercase">Close</button></div></div>
+    <div id="modal-confirm" class="modal-overlay hidden"><div class="glass-card p-10 text-center max-w-sm w-full"><div class="text-4xl text-red-500 mb-4"><i class="fas fa-trash-alt"></i></div><h2 class="text-xl font-bold mb-2 uppercase">Delete?</h2><div class="flex gap-4"><button id="btn-conf-yes" class="flex-1 bg-red-600 p-3 rounded-lg font-bold uppercase">Delete</button><button onclick="window.closeConf()" class="flex-1 bg-gray-700 p-3 rounded-lg font-bold uppercase">Cancel</button></div></div></div>
+    <div id="modal-thanks" class="modal-overlay hidden"><div class="glass-card p-10 text-center max-w-xs w-full"><div class="text-5xl text-green-500 mb-4"><i class="fas fa-check-circle"></i></div><h2 class="text-2xl font-bold mb-2">Success!</h2><p class="text-gray-400 mb-8 text-sm">Form successfully submitted.</p><button onclick="window.closeThanks()" class="w-full btn-gradient p-3 rounded-xl font-bold uppercase">OK</button></div></div>
 
     <!-- TRAINING & RULES VIEWS -->
-    <div id="view-training" class="view hidden"><h2 class="text-3xl font-bold mb-10 text-center text-yellow-400 tracking-widest uppercase">Training Hub</h2><div id="video-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div><button onclick="window.showView('dashboard')" class="mt-12 mx-auto block px-12 py-3 border border-gray-700 rounded-xl font-bold uppercase">Back</button></div>
-    <div id="view-rules" class="view hidden max-w-xl mx-auto"><div class="glass-card p-10"><h2 class="text-2xl font-bold mb-8 text-purple-400 uppercase tracking-widest text-center">Ethics</h2><div class="space-y-6 text-sm text-gray-300 leading-relaxed"><div><h4 class="font-bold text-white mb-1 tracking-wider uppercase">01. Precision</h4><p>Efficiency with grit is our primary goal.</p></div><div><h4 class="font-bold text-white mb-1 tracking-wider uppercase">02. Loyalty</h4><p>1-year professional commitment for mutual growth.</p></div></div><button onclick="window.showView('dashboard')" class="mt-10 w-full p-4 border border-gray-700 rounded-xl uppercase font-bold text-xs">Back</button></div></div>
+    <div id="view-training" class="view hidden"><h2 class="text-3xl font-bold mb-10 text-center text-yellow-400 uppercase tracking-widest">Training Hub</h2><div id="video-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div><button onclick="window.showView('dashboard')" class="mt-12 mx-auto block px-12 py-3 border border-gray-700 rounded-xl font-bold uppercase">Back</button></div>
+    <div id="view-rules" class="view hidden max-w-xl mx-auto"><div class="glass-card p-10"><h2 class="text-2xl font-bold mb-8 text-purple-400 uppercase tracking-widest text-center">Ethics</h2><div class="space-y-6 text-sm text-gray-300 leading-relaxed"><div><h4 class="font-bold text-white mb-1 tracking-wider uppercase">01. Precision</h4><p>Efficiency with grit is our priority.</p></div><div><h4 class="font-bold text-white mb-1 tracking-wider uppercase">02. Loyalty</h4><p>1-year commitment for career growth.</p></div></div><button onclick="window.showView('dashboard')" class="mt-10 w-full p-4 border border-gray-700 rounded-xl uppercase font-bold text-xs">Back</button></div></div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, onSnapshot, doc, deleteDoc, updateDoc, setDoc, query } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-
-        // Global Setup
-        let db, auth, currentUser = null, isAdmin = false, currentM = null, isNewUser = false;
-        let members = [], qs = [], vids = [], resps = [], inqs = [], pendingDelete = null;
-        let appId = 'gelexa-v1';
-
-        // 1. SAFE CONFIG LOADING
-        const initSystem = async () => {
-            try {
-                // If on GitHub Pages, __firebase_config won't exist. We need to catch that.
-                if (typeof __firebase_config === 'undefined') {
-                    console.log("Database config missing. Switching to offline mode.");
-                    document.getElementById('db-status').innerText = "Offline Mode (Local)";
-                    return;
-                }
-                
-                const firebaseConfig = JSON.parse(__firebase_config);
-                appId = typeof __app_id !== 'undefined' ? __app_id : 'gelexa-v1';
-                const app = initializeApp(firebaseConfig);
-                db = getFirestore(app);
-                auth = getAuth(app);
-
-                // 2. AUTHENTICATE
-                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                    await signInWithCustomToken(auth, __initial_auth_token);
-                } else { await signInAnonymously(auth); }
-
-                onAuthStateChanged(auth, u => {
-                    currentUser = u;
-                    if(u) {
-                        document.getElementById('db-status').innerText = "System Synced";
-                        fetchData();
-                    }
-                });
-            } catch (err) { 
-                console.error("Init Fail:", err);
-                document.getElementById('db-status').innerText = "Error Connecting";
+    <script>
+        // --- LOCAL STORAGE DATABASE SYSTEM (NO FIREBASE) ---
+        let db = {
+            users: JSON.parse(localStorage.getItem('g_users')) || [],
+            questions: JSON.parse(localStorage.getItem('g_questions')) || [
+                { id: '1', type: 'appraisal', text: 'How is your work going?' },
+                { id: '2', type: 'interview', text: 'Why do you want to join Gelexa?' }
+            ],
+            videos: JSON.parse(localStorage.getItem('g_videos')) || [
+                { id: '1', title: 'Welcome Cheetah', url: 'https://www.youtube.com/embed/dQw4w9WgXcQ' }
+            ],
+            responses: JSON.parse(localStorage.getItem('g_responses')) || [],
+            inquiries: JSON.parse(localStorage.getItem('g_inquiries')) || [],
+            config: JSON.parse(localStorage.getItem('g_config')) || {
+                ui: { c1t: "Annual Appraisal", c1d: "Review your year.", c2t: "Recruitment", c2d: "New candidates form." },
+                logo: ""
             }
         };
-        initSystem();
 
-        function fetchData() {
-            if(!db) return;
-            const logErr = (lbl) => (err) => console.error(`${lbl} error:`, err);
+        const sync = () => {
+            localStorage.setItem('g_users', JSON.stringify(db.users));
+            localStorage.setItem('g_questions', JSON.stringify(db.questions));
+            localStorage.setItem('g_videos', JSON.stringify(db.videos));
+            localStorage.setItem('g_responses', JSON.stringify(db.responses));
+            localStorage.setItem('g_inquiries', JSON.stringify(db.inquiries));
+            localStorage.setItem('g_config', JSON.stringify(db.config));
+        };
 
-            onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'config'), sn => {
-                sn.forEach(d => {
-                    const data = d.data();
-                    if(d.id === 'ui') {
-                        document.getElementById('ui-c1t').innerText = data.c1t || "Annual Appraisal";
-                        document.getElementById('ui-c1d').innerText = data.c1d || "Review Form";
-                        document.getElementById('ui-c2t').innerText = data.c2t || "Recruitment";
-                        document.getElementById('ui-c2d').innerText = data.c2d || "Interview Submission";
-                        if(isAdmin) {
-                            document.getElementById('set-c1t').value = data.c1t || ""; document.getElementById('set-c1d').value = data.c1d || "";
-                            document.getElementById('set-c2t').value = data.c2t || ""; document.getElementById('set-c2d').value = data.c2d || "";
-                        }
-                    }
-                    if(d.id === 'logo') {
-                        const h = d.data().url ? `<img src="${d.data().url}" class="dynamic-logo">` : `<div class="text-3xl text-blue-500"><i class="fas fa-bolt"></i></div>`;
-                        document.getElementById('login-logo-container').innerHTML = h; document.getElementById('header-logo-container').innerHTML = h;
-                    }
-                });
-            }, logErr('Config'));
+        let isAdmin = false, currentM = null, isNewUser = false;
+        let pendingDelete = null;
 
-            onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'users'), sn => { members = sn.docs.map(d => ({id:d.id, ...d.data()})); if(isAdmin) window.renderTeam(); }, logErr('Users'));
-            onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'questions'), sn => { qs = sn.docs.map(d => ({id:d.id, ...d.data()})); if(isAdmin) window.renderQs(); }, logErr('Qs'));
-            onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'videos'), sn => { vids = sn.docs.map(d => ({id:d.id, ...d.data()})); window.renderVids(); }, logErr('Videos'));
-            onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'responses'), sn => { resps = sn.docs.map(d => ({id:d.id, ...d.data()})); if(isAdmin) window.renderResponses(); }, logErr('Responses'));
-            onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'inquiries'), sn => { inqs = sn.docs.map(d => ({id:d.id, ...d.data()})); if(isAdmin) window.renderInquiries(); }, logErr('Inqs'));
-        }
-
-        // --- ATTACH TO WINDOW FOR GLOBAL ACCESS ---
+        // --- ACTIONS ---
         window.togglePass = (id, btnId) => {
             const el = document.getElementById(id); const btn = document.getElementById(btnId);
             el.type = el.type === 'password' ? 'text' : 'password';
@@ -318,11 +271,11 @@
             const p = document.getElementById('password').value.trim();
             const err = document.getElementById('login-error');
 
-            if(u === "Jatin" && p === "1234") { isAdmin = true; currentM = null; isNewUser = false; loginSuccess(u); }
+            if(u === "Jatin" && p === "1234") { isAdmin = true; currentM = null; loginSuccess(u); }
             else {
-                const m = members.find(x => x.username === u && x.password === p);
-                if(m) { isAdmin = false; currentM = m; isNewUser = false; loginSuccess(u); }
-                else if(u === "Team" && p === "gelexa") { isAdmin = false; currentM = null; isNewUser = false; loginSuccess("Team"); }
+                const m = db.users.find(x => x.username === u && x.password === p);
+                if(m) { isAdmin = false; currentM = m; loginSuccess(u); }
+                else if(u === "Team" && p === "gelexa") { isAdmin = false; currentM = null; loginSuccess("Team"); }
                 else { err.classList.remove('hidden'); setTimeout(() => err.classList.add('hidden'), 3000); }
             }
         };
@@ -330,23 +283,20 @@
         window.showInquiryForm = () => { document.getElementById('main-login-card').classList.add('hidden'); document.getElementById('inquiry-login-card').classList.remove('hidden'); };
         window.hideInquiryForm = () => { document.getElementById('main-login-card').classList.remove('hidden'); document.getElementById('inquiry-login-card').classList.add('hidden'); };
 
-        window.handleInquiryLogin = async () => {
+        window.handleInquiryLogin = () => {
             const n = document.getElementById('inq-name').value.trim(), m = document.getElementById('inq-mobile').value.trim();
-            if(!n || m.length < 10) return alert("FullName ane 10 digit Mobile!");
-            if(db) await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'inquiries'), { name: n, mobile: m, timestamp: new Date().toISOString() });
-            isAdmin = false; currentM = null; isNewUser = true; loginSuccess(n);
+            if(!n || m.length < 10) return alert("Fill all details!");
+            db.inquiries.push({ id: Date.now().toString(), name: n, mobile: m, timestamp: new Date().toISOString() });
+            sync(); isAdmin = false; currentM = null; isNewUser = true; loginSuccess(n);
         };
 
         function loginSuccess(name) {
             document.getElementById('login-section').classList.add('hidden');
             document.getElementById('dashboard-section').classList.remove('hidden');
-            document.getElementById('welcome-msg').innerText = `${isAdmin ? 'ADMIN' : (isNewUser ? 'GUEST' : 'MEMBER')}: ${name}`;
-            if(isAdmin) { 
-                document.getElementById('admin-btn').classList.remove('hidden'); 
-                document.getElementById('profile-btn').classList.add('hidden');
-                window.showView('admin'); 
-                if(db) { window.renderResponses(); window.renderInquiries(); window.renderTeam(); window.renderQs(); window.renderVids(); }
-            } else {
+            document.getElementById('welcome-msg').innerText = `${isAdmin ? 'ADMIN' : (isNewUser ? 'CANDIDATE' : 'MEMBER')}: ${name}`;
+            applyUI();
+            if(isAdmin) { document.getElementById('admin-btn').classList.remove('hidden'); window.showView('admin'); refreshAdmin(); }
+            else {
                 document.getElementById('admin-btn').classList.add('hidden');
                 document.getElementById('profile-btn').classList.toggle('hidden', isNewUser);
                 document.getElementById('card-appraisal').classList.toggle('hidden', isNewUser);
@@ -365,6 +315,7 @@
             else { 
                 if(v === 'profile' && currentM) { document.getElementById('prof-user').value = currentM.username; document.getElementById('prof-pass').value = currentM.password; }
                 const el = document.getElementById('view-' + v); if(el) el.classList.remove('hidden'); 
+                if(v === 'training') renderUserVids();
             }
         };
 
@@ -372,55 +323,79 @@
             document.querySelectorAll('.atab').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.atbtn').forEach(el => { el.classList.remove('text-blue-400', 'border-b-2', 'border-blue-400'); el.classList.add('text-gray-500'); });
             const t = document.getElementById('tab-'+id); if(t) t.classList.remove('hidden');
-            document.getElementById('btn-tab-'+id).classList.add('text-blue-400', 'border-b-2', 'border-blue-400');
+            event.target.classList.add('text-blue-400', 'border-b-2', 'border-blue-400');
         };
 
-        // --- SEARCHABLE RENDERS ---
-        window.renderTeam = (f = "") => { const q = f.toLowerCase(); document.getElementById('team-table').innerHTML = members.filter(m => m.username.toLowerCase().includes(q)).map(m => `<tr class="border-b border-gray-900"><td class="py-3 font-bold">${m.username}</td><td>${m.password}</td><td class="text-right"><button onclick="window.editM('${m.id}')" class="text-blue-400 mr-4"><i class="fas fa-edit"></i></button><button onclick="window.delM('${m.id}')" class="text-red-500"><i class="fas fa-trash"></i></button></td></tr>`).join(''); };
-        window.renderQs = (f = "") => { const q = f.toLowerCase(); const ab = document.getElementById('q-list-app'), ib = document.getElementById('q-list-int'); if(!ab) return; ab.innerHTML = ""; ib.innerHTML = ""; qs.filter(x => x.text.toLowerCase().includes(q)).forEach(x => { const h = `<div class="flex justify-between bg-white/5 p-2 rounded text-xs mb-1"><span>${x.text}</span><button onclick="window.delQ('${x.id}')" class="text-red-500">X</button></div>`; x.type === 'appraisal' ? ab.innerHTML += h : ib.innerHTML += h; }); };
-        window.renderResponses = (f = "") => { const ab = document.getElementById('admin-resp-app'), ib = document.getElementById('admin-resp-int'); if(!ab) return; ab.innerHTML = ""; ib.innerHTML = ""; const qv = f.toLowerCase(); resps.filter(r => (r.name || '').toLowerCase().includes(qv)).forEach(d => { const h = `<div class="p-2 bg-white/5 rounded text-sm mb-2 flex justify-between items-center group"><div class="cursor-pointer flex-1" onclick="window.viewDet('${d.id}')"><b>${d.name}</b><br><span class="opacity-30 text-[10px] uppercase">${(d.timestamp || '').split('T')[0]}</span></div><div class="flex gap-2"><button onclick="window.viewDet('${d.id}')" class="text-blue-400"><i class="fas fa-eye"></i></button><button onclick="window.delR('${d.id}')" class="text-red-500"><i class="fas fa-trash"></i></button></div></div>`; d.formType === 'appraisal' ? ab.innerHTML += h : ib.innerHTML += h; }); };
-        window.renderInquiries = (f = "") => { const q = f.toLowerCase(); document.getElementById('inquiry-list').innerHTML = inqs.filter(i => i.name.toLowerCase().includes(q) || i.mobile.includes(q)).map(i => `<div class="p-4 glass-card border border-gray-800 flex justify-between items-center"><div><h4 class="font-bold text-accent-blue">${i.name}</h4><p class="text-xs text-gray-400">Mobile: ${i.mobile}</p></div><button onclick="window.delInq('${i.id}')" class="text-red-500"><i class="fas fa-trash"></i></button></div>`).join('') || `<p class="text-xs text-gray-600">No match.</p>`; };
-        window.renderVids = (f = "") => { const q = f.toLowerCase(); const filt = vids.filter(v => v.title.toLowerCase().includes(q)); document.getElementById('video-container').innerHTML = filt.map(v => `<div class="glass-card p-4"><iframe class="w-full aspect-video rounded-lg" src="${(v.url || '').replace('watch?v=', 'embed/')}"></iframe><h4 class="mt-2 font-bold text-sm uppercase">${v.title}</h4></div>`).join(''); document.getElementById('admin-v-list').innerHTML = filt.map(v => `<div class="p-3 glass-card flex justify-between items-center text-xs"><span>${v.title}</span><button onclick="window.delV('${v.id}')" class="text-red-500"><i class="fas fa-trash"></i></button></div>`).join(''); };
+        // --- RENDERS ---
+        function applyUI() {
+            const u = db.config.ui;
+            document.getElementById('ui-c1t').innerText = u.c1t; document.getElementById('ui-c1d').innerText = u.c1d;
+            document.getElementById('ui-c2t').innerText = u.c2t; document.getElementById('ui-c2d').innerText = u.c2d;
+            if(db.config.logo) {
+                const h = `<img src="${db.config.logo}" class="dynamic-logo">`;
+                document.getElementById('login-logo-container').innerHTML = h; document.getElementById('header-logo-container').innerHTML = h;
+            }
+        }
 
-        // --- ACTIONS ---
-        window.saveProfile = async () => { if(currentM && db) { await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'users', currentM.id), { username:document.getElementById('prof-user').value.trim(), password:document.getElementById('prof-pass').value.trim() }, { merge:true }); alert("Updated!"); window.logout(); } };
-        window.saveMember = async () => { const u = document.getElementById('m-user').value.trim(), p = document.getElementById('m-pass').value.trim(), id = document.getElementById('edit-mid').value; if(!u || !p || !db) return; const docRef = id ? doc(db, 'artifacts', appId, 'public', 'data', 'users', id) : doc(collection(db, 'artifacts', appId, 'public', 'data', 'users')); await setDoc(docRef, { username:u, password:p }, { merge:true }); window.cancelEdit(); };
-        window.editM = (id) => { const m = members.find(x => x.id === id); document.getElementById('edit-mid').value = id; document.getElementById('m-user').value = m.username; document.getElementById('m-pass').value = m.password; document.getElementById('team-action-title').innerText = "Edit: " + m.username; document.getElementById('cancel-edit-btn').classList.remove('hidden'); };
-        window.cancelEdit = () => { document.getElementById('edit-mid').value=""; document.getElementById('m-user').value=""; document.getElementById('m-pass').value=""; document.getElementById('team-action-title').innerText = "Manage Members"; document.getElementById('cancel-edit-btn').classList.add('hidden'); };
-        window.addQ = async () => { if(document.getElementById('q-text').value.trim() && db) { await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'questions'), {type:document.getElementById('q-type').value, text:document.getElementById('q-text').value.trim()}); document.getElementById('q-text').value=""; }};
-        window.addV = async () => { if(document.getElementById('v-title').value.trim() && db) { await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'videos'), {title:document.getElementById('v-title').value.trim(), url:document.getElementById('v-url').value.trim()}); document.getElementById('v-title').value=""; document.getElementById('v-url').value=""; }};
-        window.saveUI = async () => { if(db) { await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'config', 'ui'), { c1t: document.getElementById('set-c1t').value.trim(), c1d: document.getElementById('set-c1d').value.trim(), c2t: document.getElementById('set-c2t').value.trim(), c2d: document.getElementById('set-c2d').value.trim() }, {merge:true}); alert("UI Labels Saved!"); }};
-        window.saveLogo = async () => { if(db) { await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'config', 'logo'), { url: document.getElementById('set-logo').value.trim() }, {merge:true}); alert("Logo Updated!"); }};
+        function refreshAdmin() {
+            window.renderTeam(); window.renderQs(); window.renderResponses(); window.renderInquiries(); window.renderVids();
+            const u = db.config.ui;
+            document.getElementById('set-c1t').value = u.c1t; document.getElementById('set-c1d').value = u.c1d;
+            document.getElementById('set-c2t').value = u.c2t; document.getElementById('set-c2d').value = u.c2d;
+            document.getElementById('set-logo').value = db.config.logo;
+        }
+
+        window.renderTeam = (f = "") => { const q = f.toLowerCase(); document.getElementById('team-table').innerHTML = db.users.filter(m => m.username.toLowerCase().includes(q)).map(m => `<tr class="border-b border-gray-900"><td class="py-3 font-bold">${m.username}</td><td>${m.password}</td><td class="text-right"><button onclick="window.editM('${m.id}')" class="text-blue-400 mr-4"><i class="fas fa-edit"></i></button><button onclick="window.delM('${m.id}')" class="text-red-500"><i class="fas fa-trash"></i></button></td></tr>`).join(''); };
+        window.renderQs = (f = "") => { const q = f.toLowerCase(); const ab = document.getElementById('q-list-app'), ib = document.getElementById('q-list-int'); ab.innerHTML = ""; ib.innerHTML = ""; db.questions.filter(x => x.text.toLowerCase().includes(q)).forEach(x => { const h = `<div class="flex justify-between bg-white/5 p-2 rounded text-xs mb-1"><span>${x.text}</span><button onclick="window.delQ('${x.id}')" class="text-red-500">X</button></div>`; x.type === 'appraisal' ? ab.innerHTML += h : ib.innerHTML += h; }); };
+        window.renderResponses = (f = "") => { const ab = document.getElementById('admin-resp-app'), ib = document.getElementById('admin-resp-int'); ab.innerHTML = ""; ib.innerHTML = ""; const qv = f.toLowerCase(); db.responses.filter(r => r.name.toLowerCase().includes(qv)).forEach(d => { const h = `<div class="p-2 bg-white/5 rounded text-sm mb-2 flex justify-between items-center group"><div class="cursor-pointer flex-1" onclick="window.viewDet('${d.id}')"><b>${d.name}</b><br><span class="opacity-30 text-[10px] uppercase">${d.timestamp.split('T')[0]}</span></div><button onclick="window.delR('${d.id}')" class="text-red-400"><i class="fas fa-trash"></i></button></div>`; d.formType === 'appraisal' ? ab.innerHTML += h : ib.innerHTML += h; }); };
+        window.renderInquiries = (f = "") => { const q = f.toLowerCase(); document.getElementById('inquiry-list').innerHTML = db.inquiries.filter(i => i.name.toLowerCase().includes(q) || i.mobile.includes(q)).map(i => `<div class="p-4 glass-card border border-gray-800 flex justify-between items-center"><div><h4 class="font-bold text-accent-blue">${i.name}</h4><p class="text-xs text-gray-400">Mob: ${i.mobile}</p></div><button onclick="window.delInq('${i.id}')" class="text-red-500"><i class="fas fa-trash"></i></button></div>`).join('') || `<p class="text-xs opacity-50">Empty.</p>`; };
+        window.renderVids = (f = "") => { const q = f.toLowerCase(); document.getElementById('admin-v-list').innerHTML = db.videos.filter(v => v.title.toLowerCase().includes(q)).map(v => `<div class="p-3 glass-card flex justify-between items-center text-xs"><span>${v.title}</span><button onclick="window.delV('${v.id}')" class="text-red-500"><i class="fas fa-trash"></i></button></div>`).join(''); };
+        function renderUserVids() { document.getElementById('video-container').innerHTML = db.videos.map(v => `<div class="glass-card p-4"><iframe class="w-full aspect-video rounded-lg" src="${v.url}"></iframe><h4 class="mt-2 font-bold text-sm uppercase">${v.title}</h4></div>`).join(''); }
+
+        // --- DATABASE OPS ---
+        window.saveMember = () => {
+            const u = document.getElementById('m-user').value.trim(), p = document.getElementById('m-pass').value.trim(), id = document.getElementById('edit-mid').value;
+            if(!u || !p) return alert("Fill all!");
+            if(id) { let m = db.users.find(x => x.id === id); if(m){ m.username = u; m.password = p; } }
+            else { db.users.push({ id: Date.now().toString(), username: u, password: p }); }
+            sync(); window.cancelEdit(); window.renderTeam();
+        };
+        window.editM = (id) => { const m = db.users.find(x => x.id === id); document.getElementById('edit-mid').value = id; document.getElementById('m-user').value = m.username; document.getElementById('m-pass').value = m.password; document.getElementById('team-action-title').innerText = "Edit: " + m.username; document.getElementById('cancel-edit-btn').classList.remove('hidden'); };
+        window.cancelEdit = () => { document.getElementById('edit-mid').value=""; document.getElementById('m-user').value=""; document.getElementById('m-pass').value=""; document.getElementById('team-action-title').innerText = "Add New Member"; document.getElementById('cancel-edit-btn').classList.add('hidden'); };
+        
+        window.addQ = () => { const tx = document.getElementById('q-text').value.trim(); if(tx){ db.questions.push({ id: Date.now().toString(), type: document.getElementById('q-type').value, text: tx }); sync(); document.getElementById('q-text').value=""; window.renderQs(); }};
+        window.addV = () => { const t = document.getElementById('v-title').value.trim(), u = document.getElementById('v-url').value.trim(); if(t && u){ db.videos.push({ id: Date.now().toString(), title: t, url: u }); sync(); document.getElementById('v-title').value=""; document.getElementById('v-url').value=""; window.renderVids(); }};
+        window.saveUI = () => { db.config.ui = { c1t: document.getElementById('set-c1t').value, c1d: document.getElementById('set-c1d').value, c2t: document.getElementById('set-c2t').value, c2d: document.getElementById('set-c2d').value }; sync(); applyUI(); alert("UI Updated!"); };
+        window.saveLogo = () => { db.config.logo = document.getElementById('set-logo').value; sync(); applyUI(); alert("Logo Updated!"); };
+        window.saveProfile = () => { if(currentM) { currentM.username = document.getElementById('prof-user').value; currentM.password = document.getElementById('prof-pass').value; sync(); alert("Profile Updated!"); window.logout(); } };
 
         // --- UTILS ---
-        window.viewDet = (id) => { const r = resps.find(x => x.id === id); if(!r) return; document.getElementById('det-name').innerText = r.name; document.getElementById('det-content').innerHTML = Object.keys(r.answers || {}).map(qid => { const q = qs.find(x => x.id === qid); return `<div class="p-3 border-l-4 border-blue-500 bg-white/5 rounded-r-lg"><p class="text-[10px] font-bold text-gray-400 uppercase mb-1">${q ? q.text : "Q"}</p><p class="text-sm">${r.answers[qid] || "(Khali)"}</p></div>`; }).join(''); document.getElementById('modal-detail').classList.remove('hidden'); };
+        window.viewDet = (id) => { const r = db.responses.find(x => x.id === id); if(!r) return; document.getElementById('det-name').innerText = r.name; document.getElementById('det-content').innerHTML = Object.keys(r.answers).map(qid => { const q = db.questions.find(x => x.id === qid); return `<div class="p-3 border-l-4 border-blue-500 bg-white/5 rounded-r-lg"><p class="text-[10px] font-bold text-gray-500 uppercase mb-1">${q ? q.text : "Q"}</p><p class="text-sm">${r.answers[qid]}</p></div>`; }).join(''); document.getElementById('modal-detail').classList.remove('hidden'); };
         window.closeDet = () => document.getElementById('modal-detail').classList.add('hidden');
         window.closeThanks = () => { document.getElementById('modal-thanks').classList.add('hidden'); window.showView('dashboard'); };
         window.openConf = (fn) => { pendingDelete = fn; document.getElementById('modal-confirm').classList.remove('hidden'); };
         window.closeConf = () => { pendingDelete = null; document.getElementById('modal-confirm').classList.add('hidden'); };
-        document.getElementById('btn-conf-yes').onclick = async () => { if(pendingDelete) await pendingDelete(); window.closeConf(); };
+        document.getElementById('btn-conf-yes').onclick = () => { if(pendingDelete) pendingDelete(); window.closeConf(); };
         
-        window.delR = (id) => window.openConf(() => deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'responses', id)));
-        window.delM = (id) => window.openConf(() => deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'users', id)));
-        window.delQ = (id) => window.openConf(() => deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'questions', id)));
-        window.delV = (id) => window.openConf(() => deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'videos', id)));
-        window.delInq = (id) => window.openConf(() => deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'inquiries', id)));
+        window.delR = (id) => window.openConf(() => { db.responses = db.responses.filter(x => x.id !== id); sync(); window.renderResponses(); });
+        window.delM = (id) => window.openConf(() => { db.users = db.users.filter(x => x.id !== id); sync(); window.renderTeam(); });
+        window.delQ = (id) => window.openConf(() => { db.questions = db.questions.filter(x => x.id !== id); sync(); window.renderQs(); });
+        window.delV = (id) => window.openConf(() => { db.videos = db.videos.filter(x => x.id !== id); sync(); window.renderVids(); });
+        window.delInq = (id) => window.openConf(() => { db.inquiries = db.inquiries.filter(x => x.id !== id); sync(); window.renderInquiries(); });
 
         function setupForm(type) {
             const container = document.getElementById('form-questions-container'), title = document.getElementById('form-title');
-            container.innerHTML = `<div><label class="block text-xs font-bold text-gray-500 uppercase mb-2">FullName</label><input type="text" id="fn" class="w-full p-4 rounded-xl outline-none font-bold"><span id="err-fn" class="error-msg">Kindly fill this</span></div>`;
-            title.innerText = type === 'appraisal' ? document.getElementById('ui-c1t').innerText : document.getElementById('ui-c2t').innerText;
-            qs.filter(q => q.type === type).forEach(q => {
-                container.innerHTML += `<div><label class="block text-xs font-bold text-gray-500 uppercase mb-2">${q.text}</label><textarea data-qid="${q.id}" class="dq w-full p-4 rounded-xl outline-none" rows="3"></textarea><span id="err-${q.id}" class="error-msg">Kindly fill this</span></div>`;
-            });
+            container.innerHTML = `<div><label class="block text-xs font-bold text-gray-500 uppercase mb-2">Your Name</label><input type="text" id="fn" class="w-full p-4 rounded-xl outline-none font-bold"></div>`;
+            title.innerText = type === 'appraisal' ? db.config.ui.c1t : db.config.ui.c2t;
+            db.questions.filter(q => q.type === type).forEach(q => { container.innerHTML += `<div><label class="block text-xs font-bold text-gray-500 uppercase mb-2">${q.text}</label><textarea data-qid="${q.id}" class="dq w-full p-4 rounded-xl outline-none" rows="3"></textarea></div>`; });
             document.getElementById('form-submit-btn').onclick = () => submitForm(type);
         }
 
-        async function submitForm(type) {
-            let valid = true;
-            const fn = document.getElementById('fn'); if(!fn.value.trim()){ document.getElementById('err-fn').style.display='block'; valid=false; } else { document.getElementById('err-fn').style.display='none'; }
-            const ans = {}; document.querySelectorAll('.dq').forEach(el => { const qid = el.getAttribute('data-qid'), err = document.getElementById('err-'+qid); if(!el.value.trim()){ if(err) err.style.display='block'; valid=false; } else { if(err) err.style.display='none'; ans[qid] = el.value.trim(); } });
-            if(valid && db) { await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'responses'), { name: fn.value.trim(), formType: type, answers: ans, timestamp: new Date().toISOString() }); document.getElementById('modal-thanks').classList.remove('hidden'); }
+        function submitForm(type) {
+            const name = document.getElementById('fn').value.trim(); if(!name) return alert("Enter Name!");
+            const ans = {}; document.querySelectorAll('.dq').forEach(el => { ans[el.getAttribute('data-qid')] = el.value.trim(); });
+            db.responses.push({ id: Date.now().toString(), name, formType: type, answers: ans, timestamp: new Date().toISOString() });
+            sync(); document.getElementById('modal-thanks').classList.remove('hidden');
         }
     </script>
 </body>
