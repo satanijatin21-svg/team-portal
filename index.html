@@ -31,223 +31,559 @@
             transform: translateY(-2px);
             box-shadow: 0 10px 20px rgba(0, 119, 182, 0.4);
         }
+        .btn-gradient:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
         input, textarea, select {
             background: rgba(255, 255, 255, 0.1) !important;
             border: 1px solid rgba(255, 255, 255, 0.2) !important;
             color: white !important;
         }
-        .cheetah-logo {
-            font-size: 3rem;
-            background: -webkit-linear-gradient(#00b4d8, #0077b6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .error-msg {
+            color: #ff4d4d;
+            font-size: 0.75rem;
+            margin-top: 2px;
+            display: none;
         }
         .hidden { display: none; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--navy); }
+        ::-webkit-scrollbar-thumb { background: var(--electric-blue); border-radius: 10px; }
+        
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .dynamic-logo {
+            max-height: 80px;
+            max-width: 180px;
+            object-fit: contain;
+        }
     </style>
 </head>
 <body class="p-4 md:p-10">
 
     <!-- LOGIN SECTION -->
     <div id="login-section" class="max-w-md mx-auto mt-20 text-center">
-        <div class="cheetah-logo mb-4"><i class="fas fa-bolt"></i></div>
+        <div id="login-logo-container" class="mb-6 flex justify-center">
+            <div class="text-5xl text-blue-500"><i class="fas fa-bolt"></i></div>
+        </div>
         <h1 class="text-3xl font-bold mb-2">GELEXA LOGIN</h1>
-        <p class="text-gray-400 mb-8">Welcome Cheetah! Login to Drive the Brand.</p>
+        <p class="text-gray-400 mb-8" id="login-status">Verifying connection...</p>
         
         <div class="glass-card p-8">
             <div class="mb-4 text-left">
-                <label class="block text-sm mb-2 text-gray-400">Team Member Name</label>
-                <input type="text" id="username" class="w-full p-3 rounded-lg outline-none" placeholder="Enter your name">
+                <label class="block text-sm mb-2 text-gray-400">Username</label>
+                <input type="text" id="username" class="w-full p-3 rounded-lg outline-none" placeholder="Enter username" autocomplete="off">
             </div>
             <div class="mb-6 text-left">
                 <label class="block text-sm mb-2 text-gray-400">Password</label>
-                <input type="password" id="password" class="w-full p-3 rounded-lg outline-none" placeholder="••••••••">
+                <input type="password" id="password" class="w-full p-3 rounded-lg outline-none" placeholder="••••" autocomplete="off">
             </div>
-            <button onclick="handleLogin()" class="w-full btn-gradient p-3 rounded-lg font-bold">Login Now</button>
-            <p id="login-error" class="text-red-500 mt-4 text-sm hidden">Invalid credentials. Only Cheetahs allowed!</p>
+            <button id="login-btn" onclick="window.handleLogin()" class="w-full btn-gradient p-3 rounded-lg font-bold" disabled>Login Now</button>
+            <p id="login-error" class="text-red-500 mt-4 text-sm hidden">Invalid credentials!</p>
         </div>
     </div>
 
     <!-- MAIN DASHBOARD -->
     <div id="dashboard-section" class="max-w-6xl mx-auto hidden">
-        <header class="flex justify-between items-center mb-10 border-b border-gray-800 pb-6">
-            <div>
-                <h1 class="text-2xl font-bold text-blue-400">GELEXA PORTAL</h1>
-                <p class="text-sm text-gray-400">Driven by Grit, Scaling Your Brand</p>
+        <header class="flex flex-col md:flex-row justify-between items-center mb-10 border-b border-gray-800 pb-6 gap-4">
+            <div class="flex items-center gap-4">
+                <div id="header-logo-container">
+                    <div class="text-3xl text-blue-400"><i class="fas fa-bolt"></i></div>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold text-blue-400">GELEXA PORTAL</h1>
+                    <p class="text-xs text-gray-400" id="welcome-msg">Driven by Grit</p>
+                </div>
             </div>
-            <button onclick="logout()" class="bg-red-900/30 text-red-400 px-4 py-2 rounded-lg border border-red-900/50">Logout</button>
+            <div class="flex flex-wrap justify-center gap-3">
+                <button id="profile-btn" onclick="window.showView('profile')" class="bg-blue-900/30 text-blue-400 px-4 py-2 rounded-lg border border-blue-900/50"><i class="fas fa-user-circle mr-2"></i>My Profile</button>
+                <button id="admin-btn" onclick="window.showView('admin')" class="hidden bg-yellow-900/30 text-yellow-400 px-4 py-2 rounded-lg border border-yellow-900/50"><i class="fas fa-user-shield mr-2"></i>Admin Panel</button>
+                <button onclick="window.logout()" class="bg-red-900/30 text-red-400 px-4 py-2 rounded-lg border border-red-900/50">Logout</button>
+            </div>
         </header>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            <!-- Card 1 -->
-            <div onclick="showView('appraisal')" class="glass-card p-6 cursor-pointer hover:bg-white/10 transition">
+        <!-- DASHBOARD GRID -->
+        <div id="dashboard-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <div onclick="window.showView('appraisal')" class="glass-card p-6 cursor-pointer hover:bg-white/10 transition">
                 <div class="text-blue-400 text-3xl mb-4"><i class="fas fa-chart-line"></i></div>
-                <h3 class="text-xl font-bold mb-2">Annual Appraisal</h3>
-                <p class="text-sm text-gray-400">પગાર વધારા અને વર્ષના રિવ્યુ માટેનું ફોર્મ.</p>
+                <h3 class="text-xl font-bold mb-2" id="ui-card1-title">Annual Appraisal</h3>
+                <p class="text-sm text-gray-400" id="ui-card1-desc">Salary review form.</p>
             </div>
-            <!-- Card 2 -->
-            <div onclick="showView('interview')" class="glass-card p-6 cursor-pointer hover:bg-white/10 transition">
+            <div onclick="window.showView('interview')" class="glass-card p-6 cursor-pointer hover:bg-white/10 transition">
                 <div class="text-green-400 text-3xl mb-4"><i class="fas fa-user-plus"></i></div>
-                <h3 class="text-xl font-bold mb-2">Recruitment</h3>
-                <p class="text-sm text-gray-400">નવા મેમ્બર્સ માટે ઇન્ટરવ્યુ અને હાયરિંગ ફોર્મ.</p>
+                <h3 class="text-xl font-bold mb-2" id="ui-card2-title">Recruitment</h3>
+                <p class="text-sm text-gray-400">New hiring form.</p>
             </div>
-            <!-- Card 3 -->
-            <div onclick="showView('training')" class="glass-card p-6 cursor-pointer hover:bg-white/10 transition">
+            <div onclick="window.showView('training')" class="glass-card p-6 cursor-pointer hover:bg-white/10 transition">
                 <div class="text-yellow-400 text-3xl mb-4"><i class="fas fa-play-circle"></i></div>
-                <h3 class="text-xl font-bold mb-2">Training Hub</h3>
-                <p class="text-sm text-gray-400">સ્કીલ્સ અને કામ શીખવા માટેના વિડિયો લાઈબ્રેરી.</p>
+                <h3 class="text-xl font-bold mb-2" id="ui-card3-title">Training Hub</h3>
+                <p class="text-sm text-gray-400">Videos & skills.</p>
             </div>
-            <!-- Card 4 -->
-            <div onclick="showView('rules')" class="glass-card p-6 cursor-pointer hover:bg-white/10 transition">
+            <div onclick="window.showView('rules')" class="glass-card p-6 cursor-pointer hover:bg-white/10 transition">
                 <div class="text-purple-400 text-3xl mb-4"><i class="fas fa-book"></i></div>
-                <h3 class="text-xl font-bold mb-2">Grit & Rules</h3>
-                <p class="text-sm text-gray-400">Gelexa ના વિઝન અને ઓફિસના નિયમો.</p>
+                <h3 class="text-xl font-bold mb-2" id="ui-card4-title">Grit & Rules</h3>
+                <p class="text-sm text-gray-400">Office policy.</p>
             </div>
         </div>
 
-        <!-- FORM: APPRAISAL -->
-        <div id="view-appraisal" class="view hidden glass-card p-8 max-w-2xl mx-auto">
-            <h2 class="text-2xl font-bold mb-6 text-blue-400">Annual Growth & Appraisal Form</h2>
-            <form action="YOUR_GOOGLE_FORM_LINK" method="POST" class="space-y-4 text-left">
-                <div>
-                    <label class="block mb-1">આ વર્ષમાં તમે કઈ નવી સ્કીલ શીખ્યા? (Office સિવાય)</label>
-                    <textarea class="w-full p-3 rounded-lg" rows="2" placeholder="Ex: AI Tools, New Software..."></textarea>
-                </div>
-                <div>
-                    <label class="block mb-1">તમે જાતે નવું શું ઈમ્પ્લીમેન્ટ કર્યું જેનાથી Gelexa ને ફાયદો થયો?</label>
-                    <textarea class="w-full p-3 rounded-lg" rows="2"></textarea>
-                </div>
-                <div>
-                    <label class="block mb-1">તમારા મતે કેટલું પગાર વધારવું જોઈએ (₹)?</label>
-                    <input type="number" class="w-full p-3 rounded-lg">
-                </div>
-                <div>
-                    <label class="block mb-1">જો વધારો મળે, તો તમે કામમાં શું 'Plus' કરીને આપશો?</label>
-                    <textarea class="w-full p-3 rounded-lg" rows="2"></textarea>
-                </div>
-                <div class="flex gap-4">
-                    <button type="submit" class="flex-1 btn-gradient p-3 rounded-lg">Submit Review</button>
-                    <button type="button" onclick="showView('dashboard')" class="px-6 border border-gray-600 rounded-lg">Back</button>
-                </div>
-            </form>
+        <!-- VIEW: DYNAMIC FORMS -->
+        <div id="view-form" class="view hidden glass-card p-8 max-w-2xl mx-auto">
+            <h2 id="form-title" class="text-2xl font-bold mb-6">Form</h2>
+            <div id="form-questions-container" class="space-y-4"></div>
+            <div class="mt-6 flex gap-4">
+                <button id="form-submit-btn" class="flex-1 btn-gradient p-3 rounded-lg font-bold">Submit</button>
+                <button onclick="window.showView('dashboard')" class="px-6 border border-gray-600 rounded-lg">Back</button>
+            </div>
         </div>
 
-        <!-- FORM: INTERVIEW -->
-        <div id="view-interview" class="view hidden glass-card p-8 max-w-2xl mx-auto">
-            <h2 class="text-2xl font-bold mb-6 text-green-400">Candidate Recruitment Form</h2>
-            <form action="YOUR_GOOGLE_FORM_LINK" method="POST" class="space-y-4 text-left">
-                <input type="text" placeholder="Full Name" class="w-full p-3 rounded-lg" required>
-                <select class="w-full p-3 rounded-lg">
-                    <option>Applying for Position...</option>
-                    <option>Graphic Designer</option>
-                    <option>Video Editor</option>
-                    <option>Web Developer</option>
-                </select>
-                <div>
-                    <label class="block mb-1">શા માટે Gelexa? (Why do you want to join?)</label>
-                    <textarea class="w-full p-3 rounded-lg" rows="2"></textarea>
-                </div>
-                <div class="flex items-center gap-3">
-                    <input type="checkbox" id="bond" required>
-                    <label for="bond">I am comfortable with the 1-year bond.</label>
-                </div>
-                <input type="number" placeholder="Expected Salary (₹)" class="w-full p-3 rounded-lg">
-                <div class="flex gap-4">
-                    <button type="submit" class="flex-1 bg-green-600 p-3 rounded-lg font-bold">Submit Application</button>
-                    <button type="button" onclick="showView('dashboard')" class="px-6 border border-gray-600 rounded-lg">Back</button>
-                </div>
-            </form>
+        <!-- VIEW: PROFILE SETTINGS -->
+        <div id="view-profile" class="view hidden glass-card p-8 max-w-md mx-auto text-center">
+            <h2 class="text-2xl font-bold mb-6 text-blue-400"><i class="fas fa-user-edit mr-2"></i>My Profile Settings</h2>
+            <div class="space-y-4 text-left">
+                <input type="text" id="prof-new-user" class="w-full p-3 rounded-lg outline-none" placeholder="Username">
+                <input type="text" id="prof-new-pass" class="w-full p-3 rounded-lg outline-none" placeholder="Password">
+                <button onclick="window.updateUserProfile()" class="w-full btn-gradient p-3 rounded-lg font-bold mt-4">Save Profile</button>
+                <button onclick="window.showView('dashboard')" class="w-full border border-gray-600 p-3 rounded-lg mt-2">Back</button>
+            </div>
         </div>
 
-        <!-- VIEW: TRAINING -->
-        <div id="view-training" class="view hidden text-center">
-            <h2 class="text-3xl font-bold mb-8">Gelexa Training Center</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- VIEW: ADMIN PANEL -->
+        <div id="view-admin" class="view hidden space-y-10">
+            <div class="flex justify-between items-center">
+                <h2 class="text-3xl font-bold text-yellow-400">Admin Control Center</h2>
+            </div>
+
+            <div class="flex gap-4 border-b border-gray-800 pb-2 overflow-x-auto">
+                <button onclick="window.showAdminTab('responses')" class="admin-tab-btn text-blue-400 border-b-2 border-blue-400 pb-2 px-4 whitespace-nowrap">Responses</button>
+                <button onclick="window.showAdminTab('team')" class="admin-tab-btn text-gray-400 pb-2 px-4 whitespace-nowrap">Manage Team</button>
+                <button onclick="window.showAdminTab('forms')" class="admin-tab-btn text-gray-400 pb-2 px-4 whitespace-nowrap">Manage Forms</button>
+                <button onclick="window.showAdminTab('videos')" class="admin-tab-btn text-gray-400 pb-2 px-4 whitespace-nowrap">Manage Videos</button>
+                <button onclick="window.showAdminTab('security')" class="admin-tab-btn text-gray-400 pb-2 px-4 whitespace-nowrap text-red-400">Security & UI</button>
+            </div>
+
+            <!-- Tab: Responses -->
+            <div id="admin-tab-responses" class="admin-tab space-y-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="glass-card p-6">
+                        <h3 class="font-bold text-blue-400 mb-4 border-b border-gray-800 pb-2">Appraisals</h3>
+                        <div id="admin-appraisal-list" class="space-y-2"></div>
+                    </div>
+                    <div class="glass-card p-6">
+                        <h3 class="font-bold text-green-400 mb-4 border-b border-gray-800 pb-2">Interviews</h3>
+                        <div id="admin-interview-list" class="space-y-2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab: Team -->
+            <div id="admin-tab-team" class="admin-tab hidden space-y-6">
                 <div class="glass-card p-6">
-                    <div class="aspect-video bg-gray-800 rounded-lg mb-4 flex items-center justify-center">
-                        <i class="fas fa-play text-4xl text-blue-500"></i>
+                    <h3 class="font-bold text-accent-blue mb-4">Add Member</h3>
+                    <div class="flex flex-col md:flex-row gap-3">
+                        <input type="hidden" id="edit-member-id">
+                        <input type="text" id="member-user" placeholder="Username" class="flex-1 p-2 rounded">
+                        <input type="text" id="member-pass" placeholder="Password" class="flex-1 p-2 rounded">
+                        <button onclick="window.saveMember()" class="btn-gradient px-6 py-2 rounded font-bold">Save</button>
                     </div>
-                    <h4 class="font-bold">Company Rules & Onboarding</h4>
                 </div>
-                <div class="glass-card p-6 opacity-50">
-                    <div class="aspect-video bg-gray-800 rounded-lg mb-4 flex items-center justify-center">
-                        <i class="fas fa-lock text-4xl"></i>
-                    </div>
-                    <h4 class="font-bold">Design Mastery (Coming Soon)</h4>
-                </div>
-                <div class="glass-card p-6 opacity-50">
-                    <div class="aspect-video bg-gray-800 rounded-lg mb-4 flex items-center justify-center">
-                        <i class="fas fa-lock text-4xl"></i>
-                    </div>
-                    <h4 class="font-bold">Web Development (Coming Soon)</h4>
+                <div class="glass-card p-6 overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead><tr class="text-gray-400 border-b border-gray-800"><th>User</th><th>Pass</th><th class="text-right">Action</th></tr></thead>
+                        <tbody id="admin-team-table"></tbody>
+                    </table>
                 </div>
             </div>
-            <button onclick="showView('dashboard')" class="mt-10 px-10 py-3 border border-gray-600 rounded-lg">Back to Dashboard</button>
-        </div>
 
-        <!-- VIEW: RULES -->
-        <div id="view-rules" class="view hidden max-w-3xl mx-auto text-left">
-            <div class="glass-card p-10">
-                <h2 class="text-3xl font-bold mb-6 text-purple-400">Company Vision & Rules</h2>
-                <div class="space-y-6 text-gray-300">
-                    <section>
-                        <h4 class="text-white font-bold mb-2">1. Our Mission</h4>
-                        <p>Gelexa એ કોઈ સાદી એજન્સી નથી, તે ગ્રાઉન્ડ લેવલથી ગ્લોબલ લેવલ સુધી પહોંચવાનું એક માધ્યમ છે. અમે 'Grit' માં માનીએ છીએ.</p>
-                    </section>
-                    <section>
-                        <h4 class="text-white font-bold mb-2">2. Team Loyalty (Bond)</h4>
-                        <p>દરેક મેમ્બર માટે ૧ વર્ષનો બોન્ડ ફરજિયાત છે જેથી આપણે સાથે ગ્રો થઈ શકીએ અને ક્લાયન્ટને બેસ્ટ સર્વિસ આપી શકીએ.</p>
-                    </section>
-                    <section>
-                        <h4 class="text-white font-bold mb-2">3. Self-Learning Culture</h4>
-                        <p>અહીંયા અમે માત્ર કામ નથી કરાવતા, પણ શીખવાડીએ પણ છીએ. જો તમે જાતે ઘરેથી કંઈક નવું શીખીને ઈમ્પ્લીમેન્ટ કરશો, તો તમારી વેલ્યુ Gelexa માં સૌથી વધુ રહેશે.</p>
+            <!-- Tab: Forms -->
+            <div id="admin-tab-forms" class="admin-tab hidden space-y-6">
+                <div class="glass-card p-6">
+                    <h3 class="font-bold mb-4">Manage Questions</h3>
+                    <div class="flex gap-3">
+                        <select id="q-type" class="p-2 rounded text-black font-bold"><option value="appraisal">Appraisal</option><option value="interview">Interview</option></select>
+                        <input type="text" id="q-text" placeholder="Question Text" class="flex-1 p-2 rounded">
+                        <button onclick="window.addQuestion()" class="bg-blue-600 px-6 py-2 rounded font-bold">Add</button>
                     </div>
                 </div>
-                <button onclick="showView('dashboard')" class="mt-8 w-full p-3 border border-gray-600 rounded-lg">Back to Dashboard</button>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="glass-card p-6"><h4 class="font-bold mb-3">Appraisal</h4><div id="admin-q-appraisal" class="space-y-2"></div></div>
+                    <div class="glass-card p-6"><h4 class="font-bold mb-3">Interview</h4><div id="admin-q-interview" class="space-y-2"></div></div>
+                </div>
+            </div>
+
+            <!-- Tab: Videos -->
+            <div id="admin-tab-videos" class="admin-tab hidden space-y-6">
+                <div class="glass-card p-6">
+                    <h3 class="font-bold mb-4">Add Video</h3>
+                    <div class="flex flex-col md:flex-row gap-3">
+                        <input type="text" id="vid-title" placeholder="Title" class="flex-1 p-2 rounded">
+                        <input type="text" id="vid-url" placeholder="YouTube URL" class="flex-1 p-2 rounded">
+                        <button onclick="window.addVideo()" class="bg-yellow-600 px-6 py-2 rounded font-bold">Add</button>
+                    </div>
+                </div>
+                <div id="admin-video-list" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+            </div>
+
+            <!-- Tab: Security & Labels -->
+            <div id="admin-tab-security" class="admin-tab hidden space-y-8">
+                <div class="glass-card p-8">
+                    <h3 class="text-xl font-bold mb-6 text-accent-blue"><i class="fas fa-edit mr-2"></i>Dashboard UI Labels</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <input type="text" id="ui-label-c1t" class="p-2 rounded" placeholder="Card 1 Title">
+                        <input type="text" id="ui-label-c1d" class="p-2 rounded" placeholder="Card 1 Desc">
+                        <input type="text" id="ui-label-c2t" class="p-2 rounded" placeholder="Card 2 Title">
+                        <input type="text" id="ui-label-c2d" class="p-2 rounded" placeholder="Card 2 Desc">
+                    </div>
+                    <button onclick="window.updateUILabels()" class="btn-gradient w-full p-3 rounded font-bold mt-6">Save UI Labels</button>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="glass-card p-6 text-center">
+                        <h3 class="font-bold mb-4 text-red-400">Master Admin Settings</h3>
+                        <input type="text" id="admin-new-user" class="w-full p-2 rounded mb-2" placeholder="Admin Username">
+                        <input type="text" id="admin-new-pass" class="w-full p-2 rounded mb-4" placeholder="Admin Password">
+                        <button onclick="window.updateAdminCredentials()" class="w-full btn-gradient p-2 rounded font-bold">Update Master Admin</button>
+                    </div>
+                    <div class="glass-card p-6">
+                        <h3 class="font-bold mb-4 text-blue-400">Logo Settings</h3>
+                        <input type="text" id="logo-url-input" class="w-full p-2 rounded mb-4" placeholder="Logo Image URL">
+                        <button onclick="window.updateLogo()" class="w-full btn-gradient p-2 rounded font-bold">Update Logo</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <script>
-        // CONFIGURATION
-        const CONFIG = {
-            username: "Jatin",
-            password: "1234"
+    <!-- VIEW: OTHER MODULES -->
+    <div id="view-training" class="view hidden">
+        <h2 class="text-3xl font-bold mb-8 text-center text-yellow-400">Training Hub</h2>
+        <div id="video-list-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        <button onclick="window.showView('dashboard')" class="mt-10 mx-auto block px-10 py-3 border border-gray-600 rounded">Back Home</button>
+    </div>
+
+    <!-- MODALS -->
+    <div id="detail-modal" class="modal-overlay hidden">
+        <div class="glass-card w-full max-w-2xl p-8 max-h-[80vh] overflow-y-auto">
+            <h2 id="modal-name" class="text-2xl font-bold mb-4 text-accent-blue">Details</h2>
+            <div id="modal-content" class="space-y-4"></div>
+            <button onclick="window.closeModal()" class="mt-8 w-full py-3 bg-gray-800 rounded">Close</button>
+        </div>
+    </div>
+
+    <div id="confirm-modal" class="modal-overlay hidden">
+        <div class="glass-card p-8 text-center max-w-sm w-full">
+            <h2 class="text-xl font-bold mb-4">Are you sure?</h2>
+            <div class="flex gap-4">
+                <button id="confirm-yes-btn" class="flex-1 bg-red-600 p-2 rounded font-bold">Delete</button>
+                <button onclick="window.closeConfirm()" class="flex-1 bg-gray-700 p-2 rounded">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="thank-you-modal" class="modal-overlay hidden">
+        <div class="glass-card p-8 text-center">
+            <h2 class="text-2xl font-bold mb-2">Thank You!</h2>
+            <p class="text-gray-400 mb-6">Thank You, your form is fillup.</p>
+            <button onclick="window.closeThankYou()" class="btn-gradient px-10 py-2 rounded font-bold">OK</button>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, onSnapshot, doc, deleteDoc, updateDoc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+
+        const firebaseConfig = JSON.parse(__firebase_config);
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'gelexa-team-portal';
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        let currentUser = null, isAdmin = false, currentLoggedInMember = null;
+        let members = [], questions = [], videos = [], responses = [];
+        let masterAdmin = null; // No hardcoded credentials here
+        let pendingAction = null;
+
+        // --- AUTH ---
+        const initAuth = async () => {
+            if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                await signInWithCustomToken(auth, __initial_auth_token);
+            } else {
+                await signInAnonymously(auth);
+            }
+        };
+        initAuth();
+
+        onAuthStateChanged(auth, u => { if (u) { currentUser = u; fetchMasterData(); } });
+
+        // --- GLOBAL ACTIONS ---
+        window.handleLogin = () => {
+            const u = document.getElementById('username').value.trim();
+            const p = document.getElementById('password').value.trim();
+            
+            // Check Master Admin first (from DB)
+            // If DB config not loaded yet, wait or use a very generic check only for first-time setup
+            if(masterAdmin && u === masterAdmin.u && p === masterAdmin.p) {
+                isAdmin = true;
+                currentLoggedInMember = null;
+                loginIn(u);
+                return;
+            }
+
+            // Fallback for FIRST TIME ONLY if DB is empty
+            if(!masterAdmin && u === "SetupAdmin" && p === "Initialize@2026") {
+                isAdmin = true;
+                loginIn("Initial Setup");
+                return;
+            }
+
+            // Check Team Members
+            const m = members.find(x => x.username === u && x.password === p);
+            if(m) { 
+                isAdmin = false; 
+                currentLoggedInMember = m;
+                loginIn(u); 
+            } else {
+                document.getElementById('login-error').classList.remove('hidden');
+            }
         };
 
-        function handleLogin() {
-            const u = document.getElementById('username').value;
-            const p = document.getElementById('password').value;
-            const error = document.getElementById('login-error');
+        window.logout = () => location.reload();
 
-            if (u === CONFIG.username && p === CONFIG.password) {
-                document.getElementById('login-section').classList.add('hidden');
-                document.getElementById('dashboard-section').classList.remove('hidden');
-                error.classList.add('hidden');
-            } else {
-                error.classList.remove('hidden');
-            }
-        }
-
-        function showView(viewId) {
-            // Hide all views and dashboard options
+        window.showView = (view) => {
             document.querySelectorAll('.view').forEach(v => v.classList.add('hidden'));
+            document.getElementById('dashboard-grid').classList.add('hidden');
             
-            if (viewId === 'dashboard') {
-                // Show grid, hide specific views
-                document.querySelector('.grid').classList.remove('hidden');
+            if(view === 'dashboard') {
+                if(isAdmin) window.showView('admin');
+                else document.getElementById('dashboard-grid').classList.remove('hidden');
+            } else if(view === 'appraisal' || view === 'interview') {
+                setupDynamicForm(view);
+                document.getElementById('view-form').classList.remove('hidden');
             } else {
-                document.querySelector('.grid').classList.add('hidden');
-                document.getElementById('view-' + viewId).classList.remove('hidden');
+                if(view === 'profile' && currentLoggedInMember) {
+                    document.getElementById('prof-new-user').value = currentLoggedInMember.username;
+                    document.getElementById('prof-new-pass').value = currentLoggedInMember.password;
+                }
+                document.getElementById('view-' + view).classList.remove('hidden');
+            }
+        };
+
+        window.showAdminTab = (tab) => {
+            document.querySelectorAll('.admin-tab').forEach(t => t.classList.add('hidden'));
+            document.querySelectorAll('.admin-tab-btn').forEach(b => {
+                b.classList.remove('text-blue-400', 'border-b-2', 'border-blue-400');
+                b.classList.add('text-gray-400');
+            });
+            document.getElementById('admin-tab-' + tab).classList.remove('hidden');
+            if(event) event.target.classList.add('text-blue-400', 'border-b-2', 'border-blue-400');
+        };
+
+        // --- FETCH MASTER DATA ---
+        function fetchMasterData() {
+            // Fetch Logo
+            onSnapshot(doc(db, 'artifacts', appId, 'public', 'data', 'config', 'logo'), sn => {
+                const url = sn.exists() ? sn.data().url : "";
+                const html = url ? `<img src="${url}" class="dynamic-logo">` : `<div class="text-3xl text-blue-500"><i class="fas fa-bolt"></i></div>`;
+                document.getElementById('login-logo-container').innerHTML = html;
+                document.getElementById('header-logo-container').innerHTML = html;
+            });
+            
+            // Fetch UI Labels
+            onSnapshot(doc(db, 'artifacts', appId, 'public', 'data', 'config', 'ui'), sn => {
+                if(sn.exists()) {
+                    const d = sn.data();
+                    document.getElementById('ui-card1-title').innerText = d.c1t || "Annual Appraisal";
+                    document.getElementById('ui-card1-desc').innerText = d.c1d || "Salary review form.";
+                    document.getElementById('ui-card2-title').innerText = d.c2t || "Recruitment";
+                    document.getElementById('ui-card2-desc').innerText = d.c2d || "New hiring form.";
+                }
+            });
+
+            // Fetch Master Admin Credentials (SECURE: Stored in DB, not code)
+            onSnapshot(doc(db, 'artifacts', appId, 'public', 'data', 'admin_config', 'master'), sn => {
+                if(sn.exists()) {
+                    const d = sn.data();
+                    masterAdmin = { u: d.username, p: d.password };
+                }
+                // Once config is checked, enable login button
+                document.getElementById('login-btn').disabled = false;
+                document.getElementById('login-status').innerText = "System ready. Welcome Cheetah!";
+            });
+
+            // Collections
+            onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'users_list'), sn => {
+                members = sn.docs.map(d => ({id: d.id, ...d.data()}));
+                if(isAdmin) updateTeamUI();
+            });
+            onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'questions'), sn => {
+                questions = sn.docs.map(d => ({id: d.id, ...d.data()}));
+                if(isAdmin) updateQuestionsUI();
+            });
+            onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'videos'), sn => {
+                videos = sn.docs.map(d => ({id: d.id, ...d.data()}));
+                renderTrainingHub(); if(isAdmin) updateVideosUI();
+            });
+            onSnapshot(collection(db, 'artifacts', appId, 'public', 'data', 'responses'), sn => {
+                responses = sn.docs.map(d => ({id: d.id, ...d.data()}));
+                if(isAdmin) updateResponsesUI();
+            });
+        }
+
+        function loginIn(name) {
+            document.getElementById('login-section').classList.add('hidden');
+            document.getElementById('dashboard-section').classList.remove('hidden');
+            document.getElementById('welcome-msg').innerText = `Hello, ${name}!`;
+            if(isAdmin) {
+                document.getElementById('admin-btn').classList.remove('hidden');
+                window.showView('admin');
+            } else {
+                document.getElementById('admin-btn').classList.add('hidden');
+                window.showView('dashboard');
             }
         }
 
-        function logout() {
+        // --- SHARED ACTIONS ---
+        window.updateUILabels = async () => {
+            const data = {
+                c1t: document.getElementById('ui-label-c1t').value.trim(),
+                c1d: document.getElementById('ui-label-c1d').value.trim(),
+                c2t: document.getElementById('ui-label-c2t').value.trim(),
+                c2d: document.getElementById('ui-label-c2d').value.trim()
+            };
+            await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'config', 'ui'), data);
+            alert("Labels saved!");
+        };
+
+        window.updateAdminCredentials = async () => {
+            const u = document.getElementById('admin-new-user').value.trim();
+            const p = document.getElementById('admin-new-pass').value.trim();
+            if(!u || !p) return;
+            await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'admin_config', 'master'), { username: u, password: p });
+            alert("Master credentials updated! Restarting...");
             location.reload();
+        };
+
+        window.updateLogo = async () => {
+            const url = document.getElementById('logo-url-input').value.trim();
+            if(!url) return;
+            await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'config', 'logo'), { url });
+            alert("Logo saved!");
+        };
+
+        window.updateUserProfile = async () => {
+            if(!currentLoggedInMember) return;
+            const u = document.getElementById('prof-new-user').value.trim();
+            const p = document.getElementById('prof-new-pass').value.trim();
+            await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'users_list', currentLoggedInMember.id), { username: u, password: p });
+            alert("Profile updated! Login again.");
+            window.logout();
+        };
+
+        // --- FORM & RENDERS (Simplified) ---
+        function setupDynamicForm(type) {
+            const container = document.getElementById('form-questions-container'), title = document.getElementById('form-title');
+            container.innerHTML = `<div><label class="block text-sm mb-1 opacity-70">Tamaru Naam</label><input type="text" id="form-user-name" class="w-full p-3 rounded-lg outline-none font-bold"><span id="err-form-user-name" class="error-msg">Kindly fill this</span></div>`;
+            title.innerText = type === 'appraisal' ? document.getElementById('ui-card1-title').innerText : document.getElementById('ui-card2-title').innerText;
+            questions.filter(q => q.type === type).forEach(q => {
+                container.innerHTML += `<div><label class="block text-sm mb-1 opacity-70">${q.text}</label><textarea data-qid="${q.id}" class="dynamic-q w-full p-3 rounded-lg outline-none" rows="2"></textarea><span id="err-${q.id}" class="error-msg">Kindly fill this</span></div>`;
+            });
+            document.getElementById('form-submit-btn').onclick = () => submitForm(type);
         }
 
-        function toggleMenu() {
-            // Mobile menu logic if needed
+        async function submitForm(type) {
+            let valid = true;
+            const name = document.getElementById('form-user-name').value.trim();
+            if(!name) { document.getElementById('err-form-user-name').style.display='block'; valid=false; }
+            const answers = {};
+            document.querySelectorAll('.dynamic-q').forEach(el => {
+                const qid = el.getAttribute('data-qid');
+                if(!el.value.trim()) { document.getElementById('err-'+qid).style.display='block'; valid=false; }
+                else { answers[qid] = el.value.trim(); }
+            });
+            if(!valid) return;
+            await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'responses'), { name, formType: type, answers, timestamp: new Date().toISOString() });
+            document.getElementById('thank-you-modal').classList.remove('hidden');
         }
+
+        // --- UI REFRESHERS ---
+        function updateTeamUI() {
+            document.getElementById('admin-team-table').innerHTML = members.map(m => `
+                <tr class="border-b border-gray-800 text-sm">
+                    <td class="p-2">${m.username}</td><td class="p-2">••••</td>
+                    <td class="p-2 text-right"><button onclick="window.editMember('${m.id}')" class="text-blue-400 mr-2"><i class="fas fa-edit"></i></button><button onclick="window.deleteMember('${m.id}')" class="text-red-400"><i class="fas fa-trash"></i></button></td>
+                </tr>`).join('');
+        }
+        function updateQuestionsUI() {
+            const ab = document.getElementById('admin-q-appraisal'), ib = document.getElementById('admin-q-interview');
+            ab.innerHTML = ""; ib.innerHTML = "";
+            questions.forEach(q => {
+                const h = `<div class="flex justify-between bg-white/5 p-2 rounded text-xs mb-1"><span>${q.text}</span><button onclick="window.delQuestion('${q.id}')" class="text-red-400">X</button></div>`;
+                if(q.type === 'appraisal') ab.innerHTML += h; else ib.innerHTML += h;
+            });
+        }
+        function updateResponsesUI() {
+            const ab = document.getElementById('admin-appraisal-list'), ib = document.getElementById('admin-interview-list');
+            ab.innerHTML = ""; ib.innerHTML = "";
+            responses.forEach(d => {
+                const h = `<div class="p-2 bg-white/5 rounded text-sm mb-2 flex justify-between items-center"><div onclick="window.viewDetails('${d.id}')"><b>${d.name}</b></div><button onclick="window.deleteResponse('${d.id}')" class="text-red-400"><i class="fas fa-trash"></i></button></div>`;
+                if(d.formType === 'appraisal') ab.innerHTML += h; else ib.innerHTML += h;
+            });
+        }
+        function renderTrainingHub() {
+            document.getElementById('video-list-container').innerHTML = videos.map(v => `<div class="glass-card p-4"><iframe class="w-full aspect-video rounded" src="${v.url.replace('watch?v=', 'embed/')}"></iframe><h4 class="mt-2 font-bold">${v.title}</h4></div>`).join('');
+        }
+        function updateVideosUI() {
+            document.getElementById('admin-video-list').innerHTML = videos.map(v => `<div class="p-2 glass-card flex justify-between mb-2"><span>${v.title}</span><button onclick="window.delVideo('${v.id}')" class="text-red-400">X</button></div>`).join('');
+        }
+
+        // --- HELPERS ---
+        window.openConfirm = (a) => { pendingAction = a; document.getElementById('confirm-modal').classList.remove('hidden'); };
+        window.closeConfirm = () => { pendingAction = null; document.getElementById('confirm-modal').classList.add('hidden'); };
+        document.getElementById('confirm-yes-btn').onclick = async () => { if(pendingAction) await pendingAction(); window.closeConfirm(); };
+        window.deleteResponse = (id) => window.openConfirm(() => deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'responses', id)));
+        window.deleteMember = (id) => window.openConfirm(() => deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'users_list', id)));
+        window.delQuestion = (id) => window.openConfirm(() => deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'questions', id)));
+        window.delVideo = (id) => window.openConfirm(() => deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'videos', id)));
+        window.closeModal = () => document.getElementById('detail-modal').classList.add('hidden');
+        window.closeThankYou = () => { document.getElementById('thank-you-modal').classList.add('hidden'); window.showView('dashboard'); };
+        window.viewDetails = (id) => {
+            const r = responses.find(x => x.id === id); if(!r) return;
+            document.getElementById('modal-name').innerText = r.name;
+            document.getElementById('modal-content').innerHTML = Object.keys(r.answers).map(qid => {
+                const q = questions.find(x => x.id === qid);
+                return `<div class="p-2 border-l-2 border-blue-400 bg-white/5"><p class="text-xs font-bold">${q ? q.text : "Q"}</p><p>${r.answers[qid]}</p></div>`;
+            }).join('');
+            document.getElementById('detail-modal').classList.remove('hidden');
+        };
+        window.saveMember = async () => {
+            const id = document.getElementById('edit-member-id').value, u = document.getElementById('member-user').value.trim(), p = document.getElementById('member-pass').value.trim();
+            if(!u || !p) return;
+            if(id) await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'users_list', id), {username: u, password: p});
+            else await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'users_list'), {username: u, password: p});
+            document.getElementById('edit-member-id').value = ""; document.getElementById('member-user').value = ""; document.getElementById('member-pass').value = "";
+        };
+        window.editMember = (id) => {
+            const m = members.find(x => x.id === id);
+            document.getElementById('edit-member-id').value = id; document.getElementById('member-user').value = m.username; document.getElementById('member-pass').value = m.password;
+        };
+        window.addQuestion = async () => {
+            const t = document.getElementById('q-type').value, tx = document.getElementById('q-text').value.trim();
+            if(tx) await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'questions'), {type:t, text:tx});
+            document.getElementById('q-text').value = "";
+        };
+        window.addVideo = async () => {
+            const t = document.getElementById('vid-title').value.trim(), u = document.getElementById('vid-url').value.trim();
+            if(t && u) await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'videos'), {title:t, url:u});
+            document.getElementById('vid-title').value = ""; document.getElementById('vid-url').value = "";
+        };
     </script>
 </body>
 </html>
