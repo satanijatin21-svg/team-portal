@@ -1,118 +1,102 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="gu">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.4">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gelexa Team Portal</title>
+    <style>
+        :root {
+            --navy: #00004d;
+            --electric-blue: #007bff;
+            --white: #ffffff;
+        }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--navy); color: var(--white); margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .container { background: rgba(255, 255, 255, 0.05); padding: 30px; border-radius: 15px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); width: 90%; max-width: 500px; text-align: center; border: 1px solid rgba(255,255,255,0.1); }
+        h2 { color: var(--electric-blue); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
+        input, select, textarea { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: none; background: rgba(255,255,255,0.9); font-size: 16px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: var(--electric-blue); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 18px; margin-top: 10px; }
+        button:hover { background: #0056b3; transform: scale(1.02); }
+        .hidden { display: none; }
+        .logo { width: 100px; margin-bottom: 10px; }
+    </style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="gu"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Gelexa Team Portal&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>:root {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>--navy: #00004d;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>--electric-blue: #007bff;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>--white: #ffffff;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>body { font-family: 'Segoe UI', sans-serif; background-color: var(--navy); color: var(--white); margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.container { background: rgba(255, 255, 255, 0.05); padding: 30px; border-radius: 15px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); width: 90%; max-width: 500px; text-align: center; border: 1px solid rgba(255,255,255,0.1); }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>h2 { color: var(--electric-blue); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>input, select, textarea { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: none; background: rgba(255,255,255,0.9); font-size: 16px; box-sizing: border-box; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>button { width: 100%; padding: 12px; background: var(--electric-blue); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 18px; margin-top: 10px; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>button:hover { background: #0056b3; transform: scale(1.02); }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.hidden { display: none; }</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.logo { width: 100px; margin-bottom: 10px; }</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="container" id="login-box"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;h2&gt;GELEXA LOGIN&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;p&gt;Welcome, Cheetah! Login to Drive the Brand.&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;input type="text" id="username" placeholder="Team Member Name"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;input type="password" id="password" placeholder="Password"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;button onclick="checkLogin()"&gt;Login&lt;/button&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="container hidden" id="dashboard"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;h2&gt;DASHBOARD&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;p&gt;Select an option to continue:&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;button onclick="showForm('appraisal')"&gt;Appraisal Form&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;button onclick="showForm('interview')"&gt;Interview Form (Recruitment)&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;button style="background: gray;" onclick="logout()"&gt;Logout&lt;/button&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="container hidden" id="appraisal-form"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;h2&gt;APPRAISAL FORM&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;form action="YOUR_GOOGLE_FORM_LINK_HERE" method="POST"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="text" placeholder="તમે નવી કઈ સ્કીલ શીખ્યા?" required&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;textarea placeholder="ઓફિસની બહાર તમે શું ઇમ્પ્લીમેન્ટ કર્યું?"&gt;&lt;/textarea&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="number" placeholder="Expected Increment (₹)" required&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;textarea placeholder="નવા વર્ષ માટે તમારું કમિટમેન્ટ શું છે?"&gt;&lt;/textarea&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;button type="submit"&gt;Submit Appraisal&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;button type="button" onclick="goBack()" style="background:none; border:1px solid white;"&gt;Back&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/form&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="container hidden" id="interview-form"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;h2&gt;INTERVIEW FORM&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;form action="YOUR_GOOGLE_FORM_LINK_HERE" method="POST"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="text" placeholder="તમારું નામ" required&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;select required&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;option value=""&gt;પોઝિશન પસંદ કરો&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;option&gt;Graphic Designer&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;option&gt;Video Editor&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;option&gt;Web Developer&lt;/option&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/select&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;textarea placeholder="શા માટે Gelexa જોઈન કરવું છે?"&gt;&lt;/textarea&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;p style="font-size: 12px;"&gt;શું તમે 1 વર્ષના બોન્ડ માટે તૈયાર છો? &lt;input type="checkbox" required&gt;&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="number" placeholder="Expected Salary"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;button type="submit"&gt;Apply Now&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;button type="button" onclick="goBack()" style="background:none; border:1px solid white;"&gt;Back&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/form&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>function checkLogin() {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const user = document.getElementById('username').value;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const pass = document.getElementById('password').value;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>// Basic Security: તું અહિયાં તારા પાસવર્ડ સેટ કરી શકે છે</p>
-<p class="p1"><span class="Apple-converted-space">        </span>if(user === "gelexa_team" &amp;&amp; pass === "grit2026") {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('login-box').classList.add('hidden');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('dashboard').classList.remove('hidden');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>} else {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>alert("Wrong Details! Only Cheetahs allowed.");</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function showForm(type) {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('dashboard').classList.add('hidden');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>if(type === 'appraisal') document.getElementById('appraisal-form').classList.remove('hidden');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>if(type === 'interview') document.getElementById('interview-form').classList.remove('hidden');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function goBack() {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('appraisal-form').classList.add('hidden');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('interview-form').classList.add('hidden');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('dashboard').classList.remove('hidden');</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>function logout() {</p>
-<p class="p1"><span class="Apple-converted-space">        </span>location.reload();</p>
-<p class="p1"><span class="Apple-converted-space">    </span>}</p>
-<p class="p1">&lt;/script&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+
+<div class="container" id="login-box">
+    <h2>GELEXA LOGIN</h2>
+    <p>Welcome, Cheetah! Login to Drive the Brand.</p>
+    <input type="text" id="username" placeholder="Team Member Name">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="checkLogin()">Login</button>
+</div>
+
+<div class="container hidden" id="dashboard">
+    <h2>DASHBOARD</h2>
+    <p>Select an option to continue:</p>
+    <button onclick="showForm('appraisal')">Appraisal Form</button>
+    <button onclick="showForm('interview')">Interview Form (Recruitment)</button>
+    <button style="background: gray;" onclick="logout()">Logout</button>
+</div>
+
+<div class="container hidden" id="appraisal-form">
+    <h2>APPRAISAL FORM</h2>
+    <form action="YOUR_GOOGLE_FORM_LINK_HERE" method="POST">
+        <input type="text" placeholder="તમે નવી કઈ સ્કીલ શીખ્યા?" required>
+        <textarea placeholder="ઓફિસની બહાર તમે શું ઇમ્પ્લીમેન્ટ કર્યું?"></textarea>
+        <input type="number" placeholder="Expected Increment (₹)" required>
+        <textarea placeholder="નવા વર્ષ માટે તમારું કમિટમેન્ટ શું છે?"></textarea>
+        <button type="submit">Submit Appraisal</button>
+        <button type="button" onclick="goBack()" style="background:none; border:1px solid white;">Back</button>
+    </form>
+</div>
+
+<div class="container hidden" id="interview-form">
+    <h2>INTERVIEW FORM</h2>
+    <form action="YOUR_GOOGLE_FORM_LINK_HERE" method="POST">
+        <input type="text" placeholder="તમારું નામ" required>
+        <select required>
+            <option value="">પોઝિશન પસંદ કરો</option>
+            <option>Graphic Designer</option>
+            <option>Video Editor</option>
+            <option>Web Developer</option>
+        </select>
+        <textarea placeholder="શા માટે Gelexa જોઈન કરવું છે?"></textarea>
+        <p style="font-size: 12px;">શું તમે 1 વર્ષના બોન્ડ માટે તૈયાર છો? <input type="checkbox" required></p>
+        <input type="number" placeholder="Expected Salary">
+        <button type="submit">Apply Now</button>
+        <button type="button" onclick="goBack()" style="background:none; border:1px solid white;">Back</button>
+    </form>
+</div>
+
+<script>
+    function checkLogin() {
+        const user = document.getElementById('username').value;
+        const pass = document.getElementById('password').value;
+        // Basic Security: તું અહિયાં તારા પાસવર્ડ સેટ કરી શકે છે
+        if(user === "gelexa_team" && pass === "grit2026") {
+            document.getElementById('login-box').classList.add('hidden');
+            document.getElementById('dashboard').classList.remove('hidden');
+        } else {
+            alert("Wrong Details! Only Cheetahs allowed.");
+        }
+    }
+
+    function showForm(type) {
+        document.getElementById('dashboard').classList.add('hidden');
+        if(type === 'appraisal') document.getElementById('appraisal-form').classList.remove('hidden');
+        if(type === 'interview') document.getElementById('interview-form').classList.remove('hidden');
+    }
+
+    function goBack() {
+        document.getElementById('appraisal-form').classList.add('hidden');
+        document.getElementById('interview-form').classList.add('hidden');
+        document.getElementById('dashboard').classList.remove('hidden');
+    }
+
+    function logout() {
+        location.reload();
+    }
+</script>
+
 </body>
 </html>
